@@ -13,6 +13,7 @@ Motion is functional and restrained. It must never delay work or compete with co
 - Marketing and documentation experiences include purposeful reveal, hover, and transition motion; static pages require an explicit product or accessibility reason.
 - Scroll reveals trigger once by default, avoid layout shifts, and keep meaningful content available before JavaScript executes.
 - GSAP animations must scope selectors to the owning component and clean up timelines on unmount.
+- Product heroes that demonstrate a CLI should launch the real command, reveal the approved terminal banner line by line, then show version, context, help, and the ready prompt in their actual order. Keep all content visible when motion is reduced or JavaScript is unavailable.
 - Honor `prefers-reduced-motion`; remove nonessential movement and autoplay.
 - Never animate layout properties in repeated/high-frequency interactions.
 - Focus placement and semantics remain correct throughout transitions.
@@ -34,6 +35,7 @@ Entrance animation on every element, bouncing CTAs, motion-only status, blocking
 - [ ] Reduced-motion behavior works.
 - [ ] Framer Motion, IntersectionObserver, or GSAP has a clear, non-overlapping responsibility.
 - [ ] The page mounts gracefully and below-fold sections reveal once as they enter the viewport.
+- [ ] CLI demonstrations reproduce the real brand and command sequence rather than a generic terminal mockup.
 - [ ] Animation is interruptible, performant, and accessible.
 
 Related: `design.md`, `accessibility.md`, `performance.md`.

@@ -21,6 +21,7 @@ Clarity precedes decoration. Use restrained surfaces, strong hierarchy, delibera
 - Light and dark themes must both preserve WCAG contrast for body copy, muted copy, links, icons, borders, code blocks, terminals, syntax states, callouts, and interactive controls. A theme is incomplete if only the page background changes.
 - When acknowledging the product toolchain, place a restrained linked-logo marquee after the first substantial value or credibility section—not between the hero and its immediate proof. Include the product itself when its standards or tooling were used to build the site; label the section honestly and do not imply sponsorship.
 - Download pages use one dominant installation or platform action, clear runtime/platform availability, alternate installation paths below, release/help links, and generous focus. Avoid equal-weight card grids above the primary download.
+- Interactive cards use the product primary color for a restrained hover-only border, tinted surface, and ambient background shadow. The glow must not obscure text, shift layout, or replace keyboard focus styling.
 - Never hard-code a new color, shadow, font, or radius when a suitable token exists.
 - A view has one dominant heading and normally one primary CTA.
 - Dense tools may optimize scan speed; marketing pages may use more expressive composition, but both use shared foundations.
@@ -49,6 +50,7 @@ Clarity precedes decoration. Use restrained surfaces, strong hierarchy, delibera
 - [ ] Theme transitions originate from the toggle, fall back safely, and honor reduced motion.
 - [ ] Brand marks are identical across every product surface.
 - [ ] Text, code, terminals, icons, and controls remain legible in both themes.
+- [ ] Card hover glow uses the primary token consistently and remains subtle in both themes.
 - [ ] Mobile, keyboard, contrast, and long-content behavior are sound.
 
 Related: `ui-components.md`, `accessibility.md`, `responsiveness.md`, `animations.md`.
