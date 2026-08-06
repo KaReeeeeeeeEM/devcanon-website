@@ -9,6 +9,7 @@ Build once, promote the same artifact, automate checks, and reduce blast radius 
 - Prefer canary/rolling releases and automatic rollback on objective signals.
 ## Rules
 - Every published version must have matching npm and GitHub Release artifacts from the same tested commit. Product changelogs link each immutable version to both registries and never advertise an unavailable download.
+- Public sites define canonical metadata, descriptive titles, unique route descriptions, complete sitemaps, robots policy, SoftwareApplication structured data, and 1200×630 Open Graph/Twitter artwork. Shared-link previews use the approved product mark and meaningful product copy.
 - Vercel is the default deployment platform for Next.js applications. Use another platform only when project requirements document a concrete reason.
 - Connect the Git repository to Vercel so pull requests receive preview deployments and the protected production branch deploys to production.
 - Secrets and environment configuration stay outside artifacts.

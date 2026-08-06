@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Apple, ArrowUpRight, Check, Code2, Download as DownloadIcon, Laptop, Package, Terminal, Workflow } from "lucide-react";
+import Link from "next/link";
 import { CopyCommand } from "@/components/copy-command";
 import { Reveal } from "@/components/reveal";
 
@@ -22,5 +23,5 @@ export default function Download(){return <main>
     <div className="platforms"><span>Available for</span><div><span><Apple/> macOS</span><span><Laptop/> Windows</span><span><Terminal/> Linux</span></div></div>
     <p className="download-note">Need a specific version? <a href="/changelog">Browse every release and download</a>. Found a problem? <a href="https://github.com/KaReeeeeeeeEM/devcanon/issues" target="_blank" rel="noreferrer">Report it on GitHub</a>.</p>
   </section>
-  <section className="download-methods"><Reveal><div className="mb-10 max-w-2xl"><p className="section-kicker">Choose your workflow</p><h2>One tool, three ways to start.</h2><p>Every installation path produces the same standards and preserves existing repository conventions.</p></div><div className="grid gap-4 md:grid-cols-3">{installs.map(({icon:Icon,title,copy,text})=><article className="install-method" key={title}><div><Icon/><Check className="status-check"/></div><h3>{title}</h3><p>{text}</p><CopyCommand command={copy}/></article>)}</div><div className="mt-8 flex flex-wrap gap-3"><a className="button-secondary" href="/docs">Read installation docs</a><a className="button-secondary" href="https://github.com/KaReeeeeeeeEM/devcanon" target="_blank" rel="noreferrer"><Code2/> View source</a></div></Reveal></section>
+  <section className="download-methods"><Reveal><div className="mb-10 max-w-2xl"><p className="section-kicker">Choose your workflow</p><h2>One tool, three ways to start.</h2><p>Every installation path produces the same standards and preserves existing repository conventions.</p></div><div className="grid gap-4 md:grid-cols-3">{installs.map(({icon:Icon,title,copy,text})=><article className="install-method" key={title}><div><Icon/><Check className="status-check"/></div><h3>{title}</h3><p>{text}</p><CopyCommand command={copy}/></article>)}</div><div className="mt-8 flex flex-wrap gap-3"><Link className="button-secondary" href="/docs">Read installation docs</Link><a className="button-secondary" href="https://github.com/KaReeeeeeeeEM/devcanon" target="_blank" rel="noreferrer"><Code2/> View source</a></div></Reveal></section>
 </main>}

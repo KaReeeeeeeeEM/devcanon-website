@@ -169,6 +169,23 @@
   .docs-article p { @apply mt-4 leading-7 text-muted-foreground; }
   .docs-article ul, .docs-article ol { @apply mt-4 space-y-2 pl-5 text-muted-foreground; }
   .docs-article li { @apply pl-1 leading-7; }
+  .docs-article a:not(.button-secondary) { @apply text-cyan-700 underline decoration-cyan-500/30 underline-offset-4 hover:decoration-cyan-500 dark:text-cyan-300; }
+  .docs-article code { @apply rounded bg-muted px-1.5 py-0.5 font-mono text-[.9em] text-foreground; }
+  .docs-commands { @apply mt-4 flex flex-col items-start gap-3; }
+  .docs-mini-card { @apply flex flex-col rounded-xl border border-border bg-card p-4; }
+  .docs-mini-card svg { @apply mb-4 size-5 text-cyan-500; }
+  .docs-mini-card strong { @apply text-sm text-foreground; }
+  .docs-mini-card span { @apply mt-1 text-xs leading-5 text-muted-foreground; }
+  .docs-link-grid { @apply mt-5 grid gap-3; }
+  .docs-link-grid a { @apply grid grid-cols-[1fr_auto] items-center rounded-xl border border-border bg-card p-4 no-underline! transition hover:border-cyan-500/40 hover:bg-cyan-500/[.05]; }
+  .docs-link-grid strong { @apply text-sm text-foreground; }
+  .docs-link-grid span { @apply mt-1 text-sm text-muted-foreground; }
+  .docs-link-grid svg { @apply row-span-2 size-4 text-cyan-500; }
+  .docs-pager { @apply mt-16 grid grid-cols-2 gap-3 border-t border-border pt-6; }
+  .docs-pager a { @apply flex items-center justify-between gap-3 rounded-xl border border-border p-4 no-underline! transition hover:border-cyan-500/40 hover:bg-cyan-500/[.05]; }
+  .docs-pager a:last-child { @apply text-right; }
+  .docs-pager svg { @apply size-4 shrink-0 text-cyan-500; }
+  .docs-pager small { @apply mb-1 block text-[10px] uppercase tracking-wider text-muted-foreground; }
   .callout { @apply mt-6 rounded-xl border border-cyan-500/20 bg-cyan-500/[.06] p-5 text-sm leading-6 text-muted-foreground; }
   .toc { @apply sticky top-24 hidden self-start text-xs text-muted-foreground lg:block; }
   .toc a { @apply mt-3 block transition hover:text-foreground; }
@@ -265,6 +282,11 @@
 @keyframes ripple { from { width:3rem; opacity:.7 } to { width:min(70vw,58rem); opacity:0 } }
 @keyframes technology-marquee { to { transform:translateX(-50%); } }
 @keyframes page-mount { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+@keyframes terminal-line { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+@keyframes reveal-in { from { opacity:.72; transform:translateY(14px); } to { opacity:1; transform:none; } }
+.terminal-line { animation:terminal-line .3s cubic-bezier(.22,1,.36,1) both; animation-delay:var(--line-delay); }
+.reveal { opacity:1; }
+.reveal[data-visible="true"] { animation:reveal-in .5s cubic-bezier(.22,1,.36,1) both; animation-delay:var(--reveal-delay); }
 .download-hero > :not(.download-glow) { animation:page-mount .7s cubic-bezier(.22,1,.36,1) both; }
 
 @media (max-width: 640px) {
@@ -273,6 +295,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
+  .reveal { opacity:1; transform:none; }
 }
 
 ::view-transition-old(root) { animation: none; z-index: 1; }
