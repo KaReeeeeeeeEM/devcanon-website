@@ -49,6 +49,7 @@
 }
 
 :root {
+  --brand: #0891b2;
   --background: oklch(0.985 0.004 240);
   --foreground: oklch(0.18 0.025 255);
   --card: oklch(1 0 0);
@@ -84,6 +85,7 @@
 }
 
 .dark {
+  --brand: #22d3ee;
   --background: oklch(0.105 0.021 255);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -145,6 +147,8 @@
   .terminal-bar span:nth-child(2) { @apply bg-amber-400/70; }
   .terminal-bar span:nth-child(3) { @apply bg-emerald-400/70; }
   .terminal-bar p { @apply absolute inset-x-0 text-center font-mono text-[11px] text-muted-foreground; }
+  .hero-terminal { @apply w-full; }
+  .terminal-banner { @apply overflow-hidden whitespace-pre font-mono font-semibold leading-[1.05] text-cyan-600 dark:text-cyan-300; font-size:clamp(4.5px,.58vw,8px); }
   .cursor-block { @apply inline-block h-4 w-2 animate-pulse bg-cyan-300 align-middle; }
   .section-kicker { @apply font-mono text-xs uppercase tracking-[.15em] text-cyan-700 dark:text-cyan-400; }
   .section-title { @apply text-balance text-3xl font-semibold tracking-[-.035em] text-foreground sm:text-5xl; }
@@ -242,6 +246,16 @@
   .expectation-row { @apply flex gap-3 rounded-xl border border-border bg-muted/30 p-3.5; }
   .expectation-row > span { @apply grid size-6 shrink-0 place-items-center rounded-full font-mono text-[10px] font-semibold; color:var(--preset-accent); background:color-mix(in oklab,var(--preset-accent) 10%,transparent); }
   .expectation-row p { @apply text-sm leading-6 text-muted-foreground; }
+}
+
+.feature-card,.install-method,.release-card,.studio-options [data-slot="card"],.expectation-row,.standards-grid>div,.orbit-card>div:not(.orbit-center) {
+  transition:border-color .25s ease,background-color .25s ease,box-shadow .25s ease,transform .25s ease;
+}
+.feature-card:hover,.install-method:hover,.release-card:hover,.studio-options [data-slot="card"]:hover,.expectation-row:hover,.standards-grid>div:hover,.orbit-card>div:not(.orbit-center):hover {
+  border-color:color-mix(in oklab,var(--brand) 48%,var(--border));
+  background-color:color-mix(in oklab,var(--card) 92%,var(--brand) 8%);
+  box-shadow:0 14px 42px color-mix(in oklab,var(--brand) 20%,transparent),inset 0 1px color-mix(in oklab,var(--brand) 18%,transparent);
+  transform:translateY(-2px);
 }
 
 .ripple-field { position:absolute; inset:0; overflow:hidden; pointer-events:none; opacity:.6; }

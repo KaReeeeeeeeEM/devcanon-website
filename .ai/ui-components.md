@@ -12,6 +12,7 @@ Use tokens for decisions, primitives for behavior, and composed patterns for rec
 - Product code consumes the library API so styling, focus, validation, motion, and theming stay consistent; native semantics remain encapsulated inside the library primitive.
 - Preset and configuration interfaces show current selections, explain consequences in plain language, and preview resulting output before it is applied or copied.
 - Code, command, terminal, and copy components consume semantic foreground, surface, border, muted, success, and accent tokens; hard-coded dark surfaces or light text are prohibited.
+- Shared card components provide a token-driven primary-color hover glow and an independent visible focus state. Feature code must not create one-off glow recipes.
 - Shared components support ref forwarding, focus, disabled/loading states, and semantic HTML.
 - Feature-specific business logic stays outside primitives.
 - Breaking component changes require migration and consumer verification.
