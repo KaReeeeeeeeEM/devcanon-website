@@ -205,11 +205,16 @@
   .release-action svg { @apply size-4; }
   .release-command { @apply col-span-full; }
   .release-command > button { @apply w-full; }
-  .platforms { @apply mt-9 text-center; }
+  .platforms { @apply mt-12 w-full text-center; }
   .platforms > span { @apply font-mono text-[10px] uppercase tracking-[.18em] text-muted-foreground; }
-  .platforms > div { @apply mt-3 flex flex-wrap justify-center gap-2; }
-  .platforms > div > span { @apply inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground; }
-  .platforms svg { @apply size-3.5; }
+  .platform-card-grid { @apply mt-4 grid gap-3 text-left sm:grid-cols-3; }
+  .platform-card { @apply grid min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl border border-border bg-card p-4 transition hover:-translate-y-0.5 hover:border-cyan-500/40 hover:shadow-[0_18px_60px_rgba(34,211,238,.12)]; }
+  .platform-icon { @apply grid size-10 place-items-center rounded-xl bg-cyan-500/10 text-cyan-500; }
+  .platform-icon svg { @apply size-5; }
+  .platform-card strong,.platform-card small { @apply block; }
+  .platform-card strong { @apply text-sm; }
+  .platform-card small { @apply mt-1 text-[11px] leading-4 text-muted-foreground; }
+  .platform-arrow { @apply size-4 text-muted-foreground transition group-hover:translate-x-0.5; }
   .download-note { @apply mt-8 max-w-xl text-xs leading-6 text-muted-foreground; }
   .download-note a { @apply text-cyan-500 hover:underline; }
   .technology-strip { @apply border-y border-border bg-card/40 py-7; }
@@ -229,6 +234,39 @@
   .install-method > p { @apply mb-6 mt-2 min-h-12 text-sm leading-6 text-muted-foreground; }
   .install-method .copy-command { @apply w-full min-w-0 overflow-hidden; }
   .install-method code { @apply min-w-0 truncate; }
+  .platform-download-page { @apply min-h-screen; }
+  .platform-download-hero { @apply mx-auto max-w-4xl px-5 pb-16 pt-20 text-center sm:pt-28; }
+  .back-link { @apply mx-auto mb-10 inline-flex items-center gap-2 text-sm text-muted-foreground transition hover:text-foreground; }
+  .back-link svg { @apply size-4; }
+  .platform-title-icon { @apply mx-auto mb-7 grid size-20 place-items-center rounded-2xl border border-cyan-500/30 bg-cyan-500/[.08] text-cyan-500 shadow-[0_24px_80px_rgba(34,211,238,.14)]; }
+  .platform-title-icon svg { @apply size-9; }
+  .platform-download-hero h1 { @apply mt-5 text-balance text-4xl font-semibold tracking-[-.05em] sm:text-6xl; }
+  .platform-download-hero>p:not(.section-kicker) { @apply mx-auto mt-5 max-w-2xl text-pretty leading-7 text-muted-foreground; }
+  .format-list { @apply mt-6 flex flex-wrap justify-center gap-2; }
+  .format-list span { @apply rounded-full border border-border bg-card px-3 py-1 font-mono text-[11px] text-muted-foreground; }
+  .release-browser { @apply mx-auto max-w-5xl px-5 pb-24; }
+  .release-browser-heading { @apply flex flex-col justify-between gap-4 border-b border-border pb-6 sm:flex-row sm:items-end; }
+  .release-browser-heading h2 { @apply mt-3 text-2xl font-semibold sm:text-3xl; }
+  .release-browser-heading>a { @apply inline-flex items-center gap-2 text-sm text-cyan-500 hover:underline; }
+  .release-browser-heading svg { @apply size-4; }
+  .release-list { @apply divide-y divide-border; }
+  .desktop-release { @apply grid gap-6 py-8 md:grid-cols-[220px_minmax(0,1fr)]; }
+  .release-version>span { @apply font-mono text-[10px] uppercase tracking-[.16em] text-cyan-500; }
+  .release-version h3 { @apply mt-2 text-lg font-semibold; }
+  .release-version time { @apply mt-1 block text-xs text-muted-foreground; }
+  .release-assets { @apply grid gap-3; }
+  .release-assets>a { @apply grid min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-border bg-card p-4 transition hover:border-cyan-500/40 hover:bg-cyan-500/[.04]; }
+  .asset-icon { @apply grid size-9 place-items-center rounded-lg bg-muted text-cyan-500; }
+  .asset-icon svg,.release-assets>a>svg { @apply size-4; }
+  .asset-name { @apply min-w-0; }
+  .asset-name strong,.asset-name small { @apply block; }
+  .asset-name strong { @apply truncate text-sm; }
+  .asset-name small { @apply mt-1 text-xs text-muted-foreground; }
+  .empty-releases { @apply my-8 flex flex-col items-center rounded-2xl border border-dashed border-border bg-card/40 px-6 py-14 text-center; }
+  .empty-releases>svg { @apply size-8 text-cyan-500; }
+  .empty-releases h3 { @apply mt-5 text-lg font-semibold; }
+  .empty-releases p { @apply mt-2 text-sm text-muted-foreground; }
+  .empty-releases a { @apply mt-6; }
 }
 
 @layer components {

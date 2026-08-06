@@ -41,6 +41,6 @@ jobs:
           tagName: studio-v__VERSION__
           releaseName: Devcanon Studio v__VERSION__
           releaseBody: Installable desktop preset builder for macOS, Windows, and Linux.
-          releaseDraft: true
+          releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}

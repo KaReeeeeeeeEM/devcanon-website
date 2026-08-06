@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07101b" />
+    <title>Devcanon Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">D›</span><span><strong>devcanon</strong><small>Studio</small></span></div>
+      <button class="project-button" id="choose-project"><span>Open repository</span><kbd>⌘O</kbd></button>
+      <div class="project-path" id="project-path">Choose a repository containing a .ai handbook.</div>
+      <div class="sidebar-heading"><span>Standards</span><span id="file-count">0</span></div>
+      <nav class="file-list" id="file-list" aria-label="Standards files"></nav>
+      <div class="sidebar-footer">
+        <button class="update-button" id="update" disabled><span>↻</span> Update standards</button>
+        <p>Updates preserve your local changes.</p>
+      </div>
+    </aside>
+    <main class="workspace">
+      <header class="toolbar">
+        <div><p class="eyebrow">Local handbook editor</p><h1 id="file-name">Welcome to Devcanon Studio</h1></div>
+        <div class="toolbar-actions"><span class="save-state" id="save-state">No file open</span><button class="save-button" id="save" disabled>Save changes</button></div>
+      </header>
+      <section class="empty-state" id="empty-state">
+        <div class="empty-mark">D›</div>
+        <p class="eyebrow">Engineering standards, on command</p>
+        <h2>Open a repository to shape how AI builds it.</h2>
+        <p>Edit every Markdown standard locally, then safely bring the handbook up to date without leaving the desktop app.</p>
+        <button class="primary-button" id="empty-open">Open a repository</button>
+      </section>
+      <textarea id="editor" class="editor" aria-label="Standard editor" spellcheck="false" hidden></textarea>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+  </body>
+</html>
