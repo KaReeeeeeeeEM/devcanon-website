@@ -7,6 +7,7 @@ Create a recognizable, calm, high-quality interface across products without rede
 Clarity precedes decoration. Use restrained surfaces, strong hierarchy, deliberate whitespace, and one clear primary action. Derive the product’s visual language from existing screens and tokens; this handbook does not impose a brand palette.
 
 ## Best Practices
+- Every user-facing web application supports light and dark themes through semantic CSS variables; default to the operating-system preference and provide a persistent, accessible theme toggle.
 - Start from user task, content hierarchy, and states before visual polish.
 - Reuse semantic tokens for color, type, radius, spacing, elevation, and motion.
 - Prefer a neutral canvas, subtle borders, limited elevation, and brand color for meaning and emphasis.
@@ -14,6 +15,7 @@ Clarity precedes decoration. Use restrained surfaces, strong hierarchy, delibera
 - Design default, hover, focus, active, disabled, loading, empty, error, and success states together.
 
 ## Rules
+- Theme changes must update the root theme class without a flash of incorrect theme; components use semantic tokens rather than theme-specific hard-coded colors.
 - Never hard-code a new color, shadow, font, or radius when a suitable token exists.
 - A view has one dominant heading and normally one primary CTA.
 - Dense tools may optimize scan speed; marketing pages may use more expressive composition, but both use shared foundations.
@@ -34,6 +36,7 @@ Clarity precedes decoration. Use restrained surfaces, strong hierarchy, delibera
 - [ ] Hierarchy communicates the main task immediately.
 - [ ] Tokens and shared patterns are reused.
 - [ ] All interaction states are designed.
+- [ ] Light, dark, and system themes preserve contrast, hierarchy, charts, code blocks, and brand character.
 - [ ] Mobile, keyboard, contrast, and long-content behavior are sound.
 
 Related: `ui-components.md`, `accessibility.md`, `responsiveness.md`, `animations.md`.
