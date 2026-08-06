@@ -13,6 +13,7 @@ Document decisions and contracts near their owners. Prefer concise, tested, main
 - When the Reelma Pay documentation project or page is available, inspect it before designing documentation. Record its reusable layout, navigation, typography, code-example, spacing, and responsive patterns; preserve those patterns unless accessibility or this handbook requires improvement. Never invent details about an inaccessible reference.
 - Use a stable three-region shell on desktop: product/docs navigation, a readable article column, and an on-this-page table of contents for long articles. Collapse secondary navigation into accessible drawers on small screens.
 - Keep the desktop documentation side navigation sticky beneath the global header and let the document own vertical scrolling; do not add an independently scrolling navigation rail unless its content cannot fit the viewport.
+- Highlight the side-navigation item for the article section currently in view, update it as the reader scrolls or follows a hash link, and expose the state with `aria-current="location"` rather than color alone.
 - Start every page with breadcrumb context, one precise H1, a short outcome-oriented summary, and optional metadata such as product area, version, or last update.
 - Structure task documentation as prerequisites, numbered procedure, expected result, verification, troubleshooting, and next steps. Concept pages should move from mental model to examples and edge cases.
 - Keep prose measure near 65–80 characters. Use generous vertical rhythm, visible heading anchors, restrained dividers, and distinct surfaces for notes, warnings, success states, and dangerous operations.
@@ -44,6 +45,7 @@ Undated diagrams, setup steps that skip prerequisites, comments narrating code, 
 - [ ] Documentation pages match the approved reference language, including Reelma Pay when accessible.
 - [ ] Navigation, anchors, search, callouts, code blocks, mobile layout, and next steps are complete.
 - [ ] The desktop side navigation stays visible without creating a competing scroll container.
+- [ ] The active article section and its side-navigation state stay synchronized while scrolling and following deep links.
 - [ ] Light/dark code surfaces and reduced-motion anchor scrolling are verified.
 
 Related: `AGENTS.md`, `api.md`, `monitoring.md`.
