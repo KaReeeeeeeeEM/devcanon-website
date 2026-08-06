@@ -9,6 +9,7 @@ Motion is functional and restrained. It must never delay work or compete with co
 - Keep micro-interactions near 120–200ms and larger transitions near 200–300ms.
 - Preserve spatial continuity for drawers, menus, and reordered items.
 ## Rules
+- Every page receives one restrained mount transition for its primary content. Each meaningful section below the initial viewport uses a one-time `IntersectionObserver` reveal; do not animate every child independently.
 - Marketing and documentation experiences include purposeful reveal, hover, and transition motion; static pages require an explicit product or accessibility reason.
 - Scroll reveals trigger once by default, avoid layout shifts, and keep meaningful content available before JavaScript executes.
 - GSAP animations must scope selectors to the owning component and clean up timelines on unmount.
@@ -16,6 +17,13 @@ Motion is functional and restrained. It must never delay work or compete with co
 - Never animate layout properties in repeated/high-frequency interactions.
 - Focus placement and semantics remain correct throughout transitions.
 ## Examples
+```tsx
+useEffect(() => {
+  const observer = new IntersectionObserver(([entry]) => entry.isIntersecting && setVisible(true));
+  observer.observe(section);
+  return () => observer.disconnect();
+}, []);
+```
 ```css
 @media (prefers-reduced-motion: reduce) { .motion { animation: none; transition: none; } }
 ```
@@ -25,6 +33,7 @@ Entrance animation on every element, bouncing CTAs, motion-only status, blocking
 - [ ] Motion communicates a state change.
 - [ ] Reduced-motion behavior works.
 - [ ] Framer Motion, IntersectionObserver, or GSAP has a clear, non-overlapping responsibility.
+- [ ] The page mounts gracefully and below-fold sections reveal once as they enter the viewport.
 - [ ] Animation is interruptible, performant, and accessible.
 
 Related: `design.md`, `accessibility.md`, `performance.md`.

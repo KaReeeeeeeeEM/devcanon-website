@@ -15,8 +15,12 @@ Clarity precedes decoration. Use restrained surfaces, strong hierarchy, delibera
 - Design default, hover, focus, active, disabled, loading, empty, error, and success states together.
 
 ## Rules
+- Preserve the approved product mark exactly across the header, favicon, downloads, PWA, and desktop packaging. Never invent, split, redraw, or substitute the logo without explicit approval.
 - Theme changes use a click-origin circular reveal when the View Transition API is available: capture trigger coordinates, calculate the farthest-corner radius, and animate `::view-transition-new(root)` with a circular `clip-path`. Fall back immediately and disable the reveal for `prefers-reduced-motion`.
 - Theme changes must update the root theme class without a flash of incorrect theme; components use semantic tokens rather than theme-specific hard-coded colors.
+- Light and dark themes must both preserve WCAG contrast for body copy, muted copy, links, icons, borders, code blocks, terminals, syntax states, callouts, and interactive controls. A theme is incomplete if only the page background changes.
+- When acknowledging the product toolchain, place a restrained linked-logo marquee directly after the landing hero. Include the product itself when its standards or tooling were used to build the site; label the section honestly and do not imply sponsorship.
+- Download pages use one dominant installation or platform action, clear runtime/platform availability, alternate installation paths below, release/help links, and generous focus. Avoid equal-weight card grids above the primary download.
 - Never hard-code a new color, shadow, font, or radius when a suitable token exists.
 - A view has one dominant heading and normally one primary CTA.
 - Dense tools may optimize scan speed; marketing pages may use more expressive composition, but both use shared foundations.
@@ -43,6 +47,8 @@ Clarity precedes decoration. Use restrained surfaces, strong hierarchy, delibera
 - [ ] All interaction states are designed.
 - [ ] Light, dark, and system themes preserve contrast, hierarchy, charts, code blocks, and brand character.
 - [ ] Theme transitions originate from the toggle, fall back safely, and honor reduced motion.
+- [ ] Brand marks are identical across every product surface.
+- [ ] Text, code, terminals, icons, and controls remain legible in both themes.
 - [ ] Mobile, keyboard, contrast, and long-content behavior are sound.
 
 Related: `ui-components.md`, `accessibility.md`, `responsiveness.md`, `animations.md`.

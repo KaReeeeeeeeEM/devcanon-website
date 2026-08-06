@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Reveal } from "@/components/reveal";
 
 const options={projectType:["web","api","mobile","library","fullstack"],strictness:["balanced","strict"],design:["product","editorial","marketing","minimal"],density:["comfortable","compact"],accent:["cyan","blue","violet","emerald","amber","rose"],testing:["standard","high"],security:["standard","high"],docs:["three-column","article","api-reference"]} as const;
 type Preset=Record<keyof typeof options,string>;
@@ -29,7 +30,7 @@ export default function StudioPage(){
   async function copy(value:string,label:string){await navigator.clipboard.writeText(value);setCopied(label);setTimeout(()=>setCopied(""),1500)}
   function download(){const blob=new Blob([JSON.stringify({version:1,code,preset},null,2)],{type:"application/json"});const anchor=document.createElement("a");anchor.href=URL.createObjectURL(blob);anchor.download="devcanon-preset.json";anchor.click();URL.revokeObjectURL(anchor.href)}
   return <main className="min-w-0 overflow-hidden">
-    <section className="page-hero pb-10"><div className="eyebrow"><SlidersHorizontal className="size-3.5"/>Preset builder</div><h1 className="section-title mt-6 max-w-4xl">Design your engineering operating system.</h1><p className="section-copy mt-5 max-w-2xl">Make deliberate choices, preview exactly what they mean, and leave with one private installation code.</p></section>
+    <section className="page-hero pb-10"><Reveal><div className="eyebrow"><SlidersHorizontal className="size-3.5"/>Preset builder</div><h1 className="section-title mt-6 max-w-4xl">Design your engineering operating system.</h1><p className="section-copy mt-5 max-w-2xl">Make deliberate choices, preview exactly what they mean, and leave with one private installation code.</p></Reveal></section>
     <section className="studio-shell">
       <div className="min-w-0"><div className="mb-5 flex items-start justify-between gap-4"><div><h2 className="text-xl font-semibold">Configure your standards</h2><p className="mt-1 text-sm text-muted-foreground">Every choice updates the expectation preview instantly.</p></div><Button variant="outline" size="icon" onClick={()=>setPreset(initial)} aria-label="Reset preset"><RotateCcw/></Button></div>
         <div className="studio-options">{Object.entries(options).map(([key,values])=>{const typedKey=key as keyof Preset;return <Card className="gap-0 py-0" key={key}><CardHeader className="gap-1 px-4 pb-3 pt-4"><CardTitle className="text-sm">{labels[typedKey]}</CardTitle><p className="text-xs leading-5 text-muted-foreground">{descriptions[typedKey]}</p></CardHeader><CardContent className="px-4 pb-4"><Select value={preset[typedKey]} onValueChange={value=>setPreset(current=>({...current,[typedKey]:value}))}><SelectTrigger className="w-full" aria-label={labels[typedKey]}><SelectValue/></SelectTrigger><SelectContent>{values.map(value=><SelectItem key={value} value={value} className="capitalize">{value.replaceAll("-"," ")}</SelectItem>)}</SelectContent></Select></CardContent></Card>})}</div>
