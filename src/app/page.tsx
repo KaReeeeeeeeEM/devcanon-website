@@ -4,6 +4,7 @@ import { AnimatedTerminal } from "@/components/animated-terminal";
 import { CopyCommand } from "@/components/copy-command";
 import { Reveal } from "@/components/reveal";
 import { RippleBackground } from "@/components/ripple-background";
+import { TechnologyMarquee } from "@/components/technology-marquee";
 
 const standards = ["Architecture", "Product design", "Frontend", "Backend", "API design", "Database", "Security", "Accessibility", "Testing", "Deployment", "Observability", "AI features"];
 const steps = [{n:"01",title:"Install",copy:"Add Devcanon to a new or existing repository in one command."},{n:"02",title:"Configure",copy:"Choose a preset in Studio or tailor individual standards locally."},{n:"03",title:"Build",copy:"Every AI agent reads the same durable engineering judgment."}];
@@ -11,6 +12,7 @@ const faqs = [{q:"Does Devcanon overwrite my files?",a:"No. Existing instruction
 
 export default function Home() { return <main className="overflow-hidden">
   <section className="hero-grid relative border-b border-border/70"><RippleBackground/><div className="relative z-10 mx-auto grid min-h-[760px] max-w-7xl items-center gap-14 px-5 py-24 lg:grid-cols-[1.08fr_.92fr] lg:px-8"><Reveal><div className="eyebrow"><Sparkles className="size-3.5"/> Engineering standards, on command</div><h1 className="hero-title">Give every AI agent your engineering judgment.</h1><p className="hero-copy">Devcanon installs a durable engineering handbook into any repository—so architecture, design, security, testing, and delivery stay consistent without repeating yourself.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><CopyCommand command="npx devcanon init" prominent/><Link href="/studio" className="button-secondary">Build your preset <ArrowRight className="size-4"/></Link></div><div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground"><span className="benefit"><Check/>Existing repos first</span><span className="benefit"><Check/>Private by default</span><span className="benefit"><Check/>Safe updates</span></div></Reveal><Reveal delay={.15}><AnimatedTerminal/></Reveal></div></section>
+  <TechnologyMarquee />
 
   <section className="border-b border-border/70"><div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-border/70 px-5 sm:grid-cols-4 lg:px-8">{[["43","focused standards"],["10","feature blueprints"],["0","runtime dependencies"],["1","shared source of truth"]].map(([value,label])=><div className="px-4 py-9 text-center" key={label}><strong className="font-mono text-2xl text-foreground sm:text-3xl">{value}</strong><p className="mt-2 text-xs text-muted-foreground sm:text-sm">{label}</p></div>)}</div></section>
 

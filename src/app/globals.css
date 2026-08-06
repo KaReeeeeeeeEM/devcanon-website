@@ -134,46 +134,44 @@
 @layer components {
   .nav-link { @apply inline-flex h-9 items-center rounded-lg px-2.5 transition hover:bg-muted hover:text-foreground sm:px-3; }
   .hero-grid { background-image: linear-gradient(rgba(148,163,184,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.045) 1px,transparent 1px); background-size: 44px 44px; mask-image: linear-gradient(to bottom,black 70%,transparent); }
-  .eyebrow { @apply inline-flex items-center gap-2 rounded-full border border-cyan-300/15 bg-cyan-400/[.06] px-3 py-1.5 font-mono text-xs uppercase tracking-[.13em] text-cyan-300; }
-  .command-button { @apply inline-flex min-h-12 items-center justify-between gap-3 rounded-xl border border-cyan-300/20 bg-cyan-400/[.08] px-5 font-mono text-sm text-slate-100 shadow-[0_0_35px_rgba(34,211,238,.06)] transition hover:border-cyan-300/40 hover:bg-cyan-400/[.12]; }
-  .copy-command { @apply inline-flex min-h-11 items-center gap-3 rounded-lg border border-white/10 bg-[#080f1a] px-4 font-mono text-sm text-slate-200 transition hover:border-white/20; }
-  .button-secondary { @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/10 px-5 text-sm font-medium text-slate-200 transition hover:border-white/20 hover:bg-white/5; }
-  .terminal-window { @apply overflow-hidden rounded-2xl border border-white/10 bg-[#060b13] text-slate-200 shadow-2xl shadow-black/50; }
-  .terminal-bar { @apply relative flex h-11 items-center gap-2 border-b border-white/8 bg-white/[.025] px-4; }
+  .eyebrow { @apply inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/[.07] px-3 py-1.5 font-mono text-xs uppercase tracking-[.13em] text-cyan-700 dark:text-cyan-300; }
+  .command-button { @apply inline-flex min-h-12 items-center justify-between gap-3 rounded-xl border border-cyan-500/25 bg-cyan-500/[.08] px-5 font-mono text-sm text-foreground shadow-[0_0_35px_rgba(34,211,238,.06)] transition hover:border-cyan-500/45 hover:bg-cyan-500/[.12]; }
+  .copy-command { @apply inline-flex min-h-11 items-center gap-3 rounded-lg border border-border bg-muted/55 px-4 font-mono text-sm text-foreground transition hover:border-cyan-500/35 hover:bg-muted; }
+  .button-secondary { @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border px-5 text-sm font-medium text-foreground transition hover:bg-muted; }
+  .terminal-window { @apply overflow-hidden rounded-2xl border border-border bg-card text-card-foreground shadow-2xl shadow-black/10; }
+  .terminal-bar { @apply relative flex h-11 items-center gap-2 border-b border-border bg-muted/40 px-4; }
   .terminal-bar span { @apply size-2.5 rounded-full bg-slate-700; }
   .terminal-bar span:first-child { @apply bg-rose-400/70; }
   .terminal-bar span:nth-child(2) { @apply bg-amber-400/70; }
   .terminal-bar span:nth-child(3) { @apply bg-emerald-400/70; }
-  .terminal-bar p { @apply absolute inset-x-0 text-center font-mono text-[11px] text-slate-600; }
+  .terminal-bar p { @apply absolute inset-x-0 text-center font-mono text-[11px] text-muted-foreground; }
   .cursor-block { @apply inline-block h-4 w-2 animate-pulse bg-cyan-300 align-middle; }
-  .section-kicker { @apply font-mono text-xs uppercase tracking-[.15em] text-cyan-400; }
+  .section-kicker { @apply font-mono text-xs uppercase tracking-[.15em] text-cyan-700 dark:text-cyan-400; }
   .section-title { @apply text-balance text-3xl font-semibold tracking-[-.035em] text-foreground sm:text-5xl; }
   .section-copy { @apply text-pretty text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8; }
   .feature-card { @apply rounded-2xl border border-border bg-card p-6 sm:p-7; }
   .feature-card > svg { @apply size-5 text-cyan-400; }
   .feature-card h3 { @apply mt-6 text-lg font-semibold text-card-foreground; }
   .feature-card p { @apply mt-3 leading-7 text-muted-foreground; }
-  .feature-card code { @apply font-mono text-sm text-cyan-300; }
+  .feature-card code { @apply font-mono text-sm text-cyan-700 dark:text-cyan-300; }
   .docs-shell { @apply mx-auto grid max-w-7xl gap-10 px-5 py-12 lg:grid-cols-[220px_minmax(0,1fr)_180px] lg:px-8; }
   .docs-nav { @apply hidden lg:sticky lg:top-24 lg:block lg:self-start; }
-  .docs-nav a { @apply block rounded-lg px-3 py-2 text-sm text-slate-500 transition hover:bg-white/5 hover:text-white; }
-  .docs-nav .active { @apply bg-cyan-400/[.07] text-cyan-300; }
+  .docs-nav a { @apply block rounded-lg px-3 py-2 text-sm text-muted-foreground transition hover:bg-muted hover:text-foreground; }
+  .docs-nav .active { @apply bg-cyan-500/[.08] text-cyan-700 dark:text-cyan-300; }
   .docs-article { @apply min-w-0 max-w-3xl; }
-  .docs-article h1 { @apply text-4xl font-semibold tracking-[-.04em] text-white sm:text-5xl; }
-  .docs-article h2 { @apply mt-14 scroll-mt-24 border-t border-white/8 pt-10 text-2xl font-semibold tracking-tight text-white; }
-  .docs-article h3 { @apply mt-8 text-lg font-semibold text-white; }
-  .docs-article p { @apply mt-4 leading-7 text-slate-400; }
-  .docs-article ul, .docs-article ol { @apply mt-4 space-y-2 pl-5 text-slate-400; }
+  .docs-article h1 { @apply text-4xl font-semibold tracking-[-.04em] text-foreground sm:text-5xl; }
+  .docs-article h2 { @apply mt-14 scroll-mt-24 border-t border-border pt-10 text-2xl font-semibold tracking-tight text-foreground; }
+  .docs-article h3 { @apply mt-8 text-lg font-semibold text-foreground; }
+  .docs-article p { @apply mt-4 leading-7 text-muted-foreground; }
+  .docs-article ul, .docs-article ol { @apply mt-4 space-y-2 pl-5 text-muted-foreground; }
   .docs-article li { @apply pl-1 leading-7; }
-  .callout { @apply mt-6 rounded-xl border border-cyan-300/15 bg-cyan-400/[.05] p-5 text-sm leading-6 text-slate-300; }
-  .toc { @apply sticky top-24 hidden self-start text-xs text-slate-600 lg:block; }
-  .toc a { @apply mt-3 block transition hover:text-slate-300; }
+  .callout { @apply mt-6 rounded-xl border border-cyan-500/20 bg-cyan-500/[.06] p-5 text-sm leading-6 text-muted-foreground; }
+  .toc { @apply sticky top-24 hidden self-start text-xs text-muted-foreground lg:block; }
+  .toc a { @apply mt-3 block transition hover:text-foreground; }
   .page-hero { @apply mx-auto max-w-7xl px-5 pb-12 pt-20 lg:px-8; }
   .download-hero { @apply relative mx-auto flex min-h-[calc(100svh-4rem)] max-w-4xl flex-col items-center justify-center overflow-hidden px-5 py-20 text-center sm:py-28; }
   .download-glow { @apply pointer-events-none absolute inset-x-0 top-[12%] -z-10 mx-auto aspect-square max-w-2xl rounded-full opacity-70 blur-3xl; background:radial-gradient(circle,rgba(34,211,238,.12),transparent 68%); }
-  .download-mark { @apply mb-7 grid size-20 place-items-center rounded-2xl border border-cyan-400/25 bg-[#081322] font-mono text-3xl text-white shadow-[0_20px_80px_rgba(34,211,238,.16)]; }
-  .download-mark span { @apply -mr-2 font-semibold text-cyan-300; }
-  .download-mark b { @apply font-normal text-white; }
+  .download-mark { @apply mb-7 grid size-20 place-items-center rounded-2xl border border-cyan-500/30 bg-cyan-500/[.08] font-mono text-2xl font-semibold tracking-[-.12em] text-cyan-700 shadow-[0_20px_80px_rgba(34,211,238,.16)] dark:text-cyan-300; }
   .download-hero h1 { @apply mt-5 max-w-3xl text-balance text-4xl font-semibold tracking-[-.05em] sm:text-6xl; }
   .download-intro { @apply mt-5 max-w-2xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg; }
   .release-card { @apply mt-10 grid w-full max-w-2xl grid-cols-[auto_minmax(0,1fr)] items-center gap-4 rounded-2xl border border-border bg-card p-5 text-left shadow-2xl shadow-black/10 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:p-6; }
@@ -252,6 +250,8 @@
 .ripple-core { position:absolute; left:72%; top:48%; width:8px; aspect-ratio:1; border-radius:50%; background:#22d3ee; box-shadow:0 0 55px 20px rgba(34,211,238,.18); }
 @keyframes ripple { from { width:3rem; opacity:.7 } to { width:min(70vw,58rem); opacity:0 } }
 @keyframes technology-marquee { to { transform:translateX(-50%); } }
+@keyframes page-mount { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+.download-hero > :not(.download-glow) { animation:page-mount .7s cubic-bezier(.22,1,.36,1) both; }
 
 @media (max-width: 640px) {
   .ripple-field > span,.ripple-core { left:82%; top:35%; }
