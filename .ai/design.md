@@ -16,6 +16,7 @@ Clarity precedes decoration. Use restrained surfaces, strong hierarchy, delibera
 
 ## Rules
 - Preserve the approved product mark exactly across the header, favicon, downloads, PWA, and desktop packaging. Never invent, split, redraw, or substitute the logo without explicit approval.
+- Version favicon and PWA icon URLs when artwork changes so browsers, service workers, and deployment CDNs invalidate stale icon caches.
 - Theme changes use a click-origin circular reveal when the View Transition API is available: capture trigger coordinates, calculate the farthest-corner radius, and animate `::view-transition-new(root)` with a circular `clip-path`. Fall back immediately and disable the reveal for `prefers-reduced-motion`.
 - Theme changes must update the root theme class without a flash of incorrect theme; components use semantic tokens rather than theme-specific hard-coded colors.
 - Light and dark themes must both preserve WCAG contrast for body copy, muted copy, links, icons, borders, code blocks, terminals, syntax states, callouts, and interactive controls. A theme is incomplete if only the page background changes.

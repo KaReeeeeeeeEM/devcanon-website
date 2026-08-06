@@ -28,6 +28,8 @@ Document decisions and contracts near their owners. Prefer concise, tested, main
 - Never duplicate an authoritative rule; link to it.
 - Remove stale guidance rather than adding contradictory notes.
 - A documentation page is not complete without mobile navigation, deep-linkable headings, designed code/callout states, SEO metadata, and a clear next action.
+- Each primary side-navigation concept owns a stable route rather than only an in-page anchor. Every article provides contextual previous and next navigation.
+- Installation documentation must complete the journey for every supported operating system and distribution surface, including prerequisites, CLI/global/npx paths, desktop installation, verification, expected results, and troubleshooting.
 ## Examples
 ```text
 docs/adr/0023-use-outbox.md: Context → Decision → Consequences → Status
