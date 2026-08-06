@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "desktop": "npx @tauri-apps/cli@latest dev",
+    "desktop:build": "npx @tauri-apps/cli@latest build"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

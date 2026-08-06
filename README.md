@@ -2,7 +2,7 @@
 
 The official marketing, documentation, download, and release-history site for [devcanon](https://www.npmjs.com/package/devcanon).
 
-Live site: <https://kareeeeeeeeem.github.io/devcanon-website/>
+Live site: <https://devcanon-website.vercel.app>
 
 ## Development
 
