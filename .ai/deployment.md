@@ -8,6 +8,7 @@ Build once, promote the same artifact, automate checks, and reduce blast radius 
 - Run backward-compatible migrations separately from code that depends on them.
 - Prefer canary/rolling releases and automatic rollback on objective signals.
 ## Rules
+- Every published version must have matching npm and GitHub Release artifacts from the same tested commit. Product changelogs link each immutable version to both registries and never advertise an unavailable download.
 - Vercel is the default deployment platform for Next.js applications. Use another platform only when project requirements document a concrete reason.
 - Connect the Git repository to Vercel so pull requests receive preview deployments and the protected production branch deploys to production.
 - Secrets and environment configuration stay outside artifacts.
