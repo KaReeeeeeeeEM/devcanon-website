@@ -1,22 +1,30 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Devcanon Studio",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "identifier": "dev.devcanon.studio",
   "build": {
-    "beforeDevCommand": "npm run dev",
-    "devUrl": "http://localhost:3000/studio",
-    "beforeBuildCommand": "npm run build",
-    "frontendDist": "../out"
+    "frontendDist": "../desktop"
   },
   "app": {
-    "windows": [{ "title": "Devcanon Studio", "url": "studio/index.html", "width": 1240, "height": 820, "minWidth": 820, "minHeight": 620 }],
+    "withGlobalTauri": true,
+    "windows": [{ "title": "Devcanon Studio", "url": "index.html", "width": 1240, "height": 820, "minWidth": 760, "minHeight": 560 }],
     "security": { "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; connect-src 'self'" }
   },
   "bundle": {
     "active": true,
     "targets": "all",
+    "createUpdaterArtifacts": true,
     "category": "DeveloperTool",
-    "shortDescription": "Create portable devcanon presets visually."
+    "shortDescription": "Edit and update Devcanon engineering standards visually.",
+    "longDescription": "A local-first desktop companion for opening, editing, and safely updating the Devcanon handbook in any repository.",
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDcwMTBDQzJEQjZDOTZGQQpSV1Q2bG16Yndnd0JCNFpGbktJdXZrZGkzRjVjaFVaaWFJOVAzclo0MytybzhUd0dLYzd4MzVEdAo=",
+      "endpoints": ["https://github.com/KaReeeeeeeeEM/devcanon-website/releases/latest/download/latest.json"],
+      "windows": { "installMode": "passive" }
+    }
   }
 }

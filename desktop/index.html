@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#07101b" />
+    <title>Devcanon Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="fixes.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-row">
+        <div class="brand"><span class="brand-mark">D›</span><span class="brand-name"><strong>devcanon</strong><small>Studio</small></span><span class="version-badge" id="version">v—</span></div>
+        <button class="icon-button collapse-button" id="collapse" aria-label="Collapse sidebar" title="Collapse sidebar">‹</button>
+      </div>
+      <button class="project-button" id="choose-project"><span class="button-icon">＋</span><span class="sidebar-label">Open repository</span><kbd>⌘O</kbd></button>
+      <div class="sidebar-section recent-section"><div class="sidebar-heading"><span>Projects</span><span id="project-count">0</span></div><nav class="project-list" id="project-list" aria-label="Recent projects"></nav></div>
+      <div class="sidebar-section standards-section"><div class="sidebar-heading"><span>Standards</span><span id="file-count">0</span></div><nav class="file-list" id="file-list" aria-label="Standards files"></nav></div>
+      <div class="sidebar-footer">
+        <button class="app-update-button" id="app-update" hidden><span class="update-dot"></span><span class="sidebar-label"><strong>Update available</strong><small id="available-version">Devcanon Studio</small></span><span>›</span></button>
+        <p class="sidebar-label" id="update-status">Studio is up to date</p>
+      </div>
+    </aside>
+    <main class="workspace">
+      <header class="toolbar">
+        <div class="toolbar-title"><button class="icon-button expand-button" id="expand" aria-label="Expand sidebar">☰</button><div><p class="eyebrow">Local handbook editor</p><h1 id="file-name">Welcome to Devcanon Studio</h1></div></div>
+        <div class="toolbar-actions"><span class="save-state" id="save-state">No file open</span><button class="secondary-button" id="standards-update" disabled>Update handbook</button><button class="save-button" id="save" disabled>Save changes</button></div>
+      </header>
+      <section class="empty-state" id="empty-state"><div class="empty-mark">D›</div><p class="eyebrow">Engineering standards, on command</p><h2>Choose a project to shape how AI builds it.</h2><p>Start a new Devcanon project or reopen an existing handbook. Your recent projects stay one click away in the sidebar.</p><button class="primary-button" id="empty-open">Choose a project</button></section>
+      <textarea id="editor" class="editor" aria-label="Standard editor" spellcheck="false" hidden></textarea>
+
+      <section class="update-page" id="update-page" hidden>
+        <div class="update-page-inner"><button class="back-button" id="close-update">← Back to Studio</button><div class="update-orb">↻</div><p class="eyebrow">Devcanon Studio update</p><h2>Installing version <span id="update-version">—</span></h2><p id="update-message">Preparing the verified update package…</p><div class="progress-summary"><strong id="progress-percent">0%</strong><span id="progress-eta">Calculating time remaining…</span></div><div class="progress-track"><span id="progress-bar"></span></div><div class="asset-download"><span class="asset-status" id="asset-status">○</span><span><strong id="asset-name">Signed Studio update</strong><small id="asset-size">Waiting to start</small></span><span id="asset-progress">0 MB</span></div><div class="release-notes"><h3>What’s new</h3><div id="update-notes"></div></div><button class="primary-button install-button" id="install-update">Download and install</button></div>
+      </section>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+
+    <div class="modal-backdrop" id="project-modal" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title"><div class="modal-header"><div><p class="eyebrow">Project launcher</p><h2 id="project-modal-title">What would you like to open?</h2></div><button class="icon-button" data-close-modal aria-label="Close">×</button></div><p class="modal-copy">Devcanon Studio works with a local <code>.ai</code> handbook. Start fresh or continue from a repository you already configured.</p><div class="project-options"><button class="option-card" id="new-project"><span class="option-icon">＋</span><span><strong>Start a new project</strong><small>Choose a folder and initialize it with the complete Devcanon standards handbook.</small></span><span>→</span></button><button class="option-card" id="existing-project"><span class="option-icon">⌁</span><span><strong>Open an existing project</strong><small>Choose a repository that already contains a Devcanon <code>.ai</code> directory.</small></span><span>→</span></button></div><p class="modal-note">Your source code remains local. Studio only reads and writes the selected handbook.</p></section>
+    </div>
+
+    <div class="modal-backdrop" id="welcome-modal" hidden>
+      <section class="modal welcome-modal" role="dialog" aria-modal="true" aria-labelledby="welcome-title"><div class="welcome-mark">D›</div><p class="eyebrow">Update complete</p><h2 id="welcome-title">Welcome to Devcanon Studio <span id="welcome-version"></span></h2><p class="modal-copy">You’re running the newest Studio experience. Here are the improvements included in this release.</p><div class="welcome-features" id="welcome-features"></div><button class="primary-button" id="finish-welcome">Start building</button></section>
+    </div>
+  </body>
+</html>
