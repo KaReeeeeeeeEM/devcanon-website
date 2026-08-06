@@ -1,0 +1,173 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
+  --font-heading: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(0.105 0.021 255);
+  --foreground: oklch(0.96 0.012 245);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-image: radial-gradient(circle at 50% -10%, rgba(34, 211, 238, .07), transparent 32rem);
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .nav-link { @apply inline-flex h-9 items-center rounded-lg px-3 transition hover:bg-white/5 hover:text-white; }
+  .hero-grid { background-image: linear-gradient(rgba(148,163,184,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.045) 1px,transparent 1px); background-size: 44px 44px; mask-image: linear-gradient(to bottom,black 70%,transparent); }
+  .eyebrow { @apply inline-flex items-center gap-2 rounded-full border border-cyan-300/15 bg-cyan-400/[.06] px-3 py-1.5 font-mono text-xs uppercase tracking-[.13em] text-cyan-300; }
+  .command-button { @apply inline-flex min-h-12 items-center justify-between gap-3 rounded-xl border border-cyan-300/20 bg-cyan-400/[.08] px-5 font-mono text-sm text-slate-100 shadow-[0_0_35px_rgba(34,211,238,.06)] transition hover:border-cyan-300/40 hover:bg-cyan-400/[.12]; }
+  .copy-command { @apply inline-flex min-h-11 items-center gap-3 rounded-lg border border-white/10 bg-[#080f1a] px-4 font-mono text-sm text-slate-200 transition hover:border-white/20; }
+  .button-secondary { @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/10 px-5 text-sm font-medium text-slate-200 transition hover:border-white/20 hover:bg-white/5; }
+  .terminal-window { @apply overflow-hidden rounded-2xl border border-white/10 bg-[#060b13] text-slate-200 shadow-2xl shadow-black/50; }
+  .terminal-bar { @apply relative flex h-11 items-center gap-2 border-b border-white/8 bg-white/[.025] px-4; }
+  .terminal-bar span { @apply size-2.5 rounded-full bg-slate-700; }
+  .terminal-bar span:first-child { @apply bg-rose-400/70; }
+  .terminal-bar span:nth-child(2) { @apply bg-amber-400/70; }
+  .terminal-bar span:nth-child(3) { @apply bg-emerald-400/70; }
+  .terminal-bar p { @apply absolute inset-x-0 text-center font-mono text-[11px] text-slate-600; }
+  .cursor-block { @apply inline-block h-4 w-2 animate-pulse bg-cyan-300 align-middle; }
+  .section-kicker { @apply font-mono text-xs uppercase tracking-[.15em] text-cyan-400; }
+  .section-title { @apply text-balance text-3xl font-semibold tracking-[-.035em] text-white sm:text-5xl; }
+  .section-copy { @apply text-pretty text-lg leading-8 text-slate-400; }
+  .feature-card { @apply rounded-2xl border border-white/8 bg-[#0a111d] p-7; }
+  .feature-card > svg { @apply size-5 text-cyan-400; }
+  .feature-card h3 { @apply mt-6 text-lg font-semibold text-white; }
+  .feature-card p { @apply mt-3 leading-7 text-slate-400; }
+  .feature-card code { @apply font-mono text-sm text-cyan-300; }
+  .docs-shell { @apply mx-auto grid max-w-7xl gap-10 px-5 py-12 lg:grid-cols-[220px_minmax(0,1fr)_180px] lg:px-8; }
+  .docs-nav { @apply hidden lg:block; }
+  .docs-nav a { @apply block rounded-lg px-3 py-2 text-sm text-slate-500 transition hover:bg-white/5 hover:text-white; }
+  .docs-nav .active { @apply bg-cyan-400/[.07] text-cyan-300; }
+  .docs-article { @apply min-w-0 max-w-3xl; }
+  .docs-article h1 { @apply text-4xl font-semibold tracking-[-.04em] text-white sm:text-5xl; }
+  .docs-article h2 { @apply mt-14 scroll-mt-24 border-t border-white/8 pt-10 text-2xl font-semibold tracking-tight text-white; }
+  .docs-article h3 { @apply mt-8 text-lg font-semibold text-white; }
+  .docs-article p { @apply mt-4 leading-7 text-slate-400; }
+  .docs-article ul, .docs-article ol { @apply mt-4 space-y-2 pl-5 text-slate-400; }
+  .docs-article li { @apply pl-1 leading-7; }
+  .callout { @apply mt-6 rounded-xl border border-cyan-300/15 bg-cyan-400/[.05] p-5 text-sm leading-6 text-slate-300; }
+  .toc { @apply sticky top-24 hidden self-start text-xs text-slate-600 lg:block; }
+  .toc a { @apply mt-3 block transition hover:text-slate-300; }
+  .page-hero { @apply mx-auto max-w-7xl px-5 pb-12 pt-20 lg:px-8; }
+}
+
+::selection { background: rgba(34,211,238,.22); color: white; }

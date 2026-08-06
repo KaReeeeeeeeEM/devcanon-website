@@ -1,0 +1,2 @@
+import { Logo } from "@/components/logo";
+export function SiteFooter() { return <footer className="border-t border-white/8"><div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-10 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between lg:px-8"><Logo/><p>Engineering standards, on command.</p><div className="flex gap-5"><a href="https://www.npmjs.com/package/devcanon">npm</a><a href="https://github.com/KaReeeeeeeeEM/devcanon">GitHub</a><a href="https://github.com/KaReeeeeeeeEM/devcanon/blob/main/LICENSE">License</a></div></div></footer>; }
