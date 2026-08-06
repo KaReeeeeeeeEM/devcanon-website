@@ -8,6 +8,8 @@ Build once, promote the same artifact, automate checks, and reduce blast radius 
 - Run backward-compatible migrations separately from code that depends on them.
 - Prefer canary/rolling releases and automatic rollback on objective signals.
 ## Rules
+- Vercel is the default deployment platform for Next.js applications. Use another platform only when project requirements document a concrete reason.
+- Connect the Git repository to Vercel so pull requests receive preview deployments and the protected production branch deploys to production.
 - Secrets and environment configuration stay outside artifacts.
 - Every release records commit, artifact, migrations, operator, and outcome.
 - Rollback or forward-recovery steps are defined before risky release.
@@ -16,7 +18,7 @@ Build once, promote the same artifact, automate checks, and reduce blast radius 
 expand schema → deploy dual-read/write code → backfill/verify → contract schema
 ```
 ## Anti-patterns
-Manual production edits, latest-tag deployments, destructive migrations coupled to startup.
+Manual production edits, latest-tag deployments, destructive migrations coupled to startup, or exporting a Next.js application for GitHub Pages without an explicit requirement.
 ## Checklist
 - [ ] CI checks and artifact provenance pass.
 - [ ] Migration and recovery are safe.
