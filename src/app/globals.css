@@ -197,6 +197,11 @@
   .output-code { @apply max-h-24 min-w-0 overflow-auto break-all rounded-xl border border-border bg-background p-3 font-mono text-[11px] leading-5 text-cyan-600 dark:text-cyan-300; scrollbar-width: thin; }
   .command-output { @apply max-h-32 text-muted-foreground; }
   .preset-panel button svg { @apply size-4 shrink-0; }
+  .preset-orb { @apply grid size-12 shrink-0 place-items-center rounded-full border; color:var(--preset-accent); border-color:color-mix(in oklab,var(--preset-accent) 35%,transparent); background:color-mix(in oklab,var(--preset-accent) 10%,transparent); box-shadow:0 0 40px color-mix(in oklab,var(--preset-accent) 18%,transparent); }
+  .preset-orb svg { @apply size-5; }
+  .expectation-row { @apply flex gap-3 rounded-xl border border-border bg-muted/30 p-3.5; }
+  .expectation-row > span { @apply grid size-6 shrink-0 place-items-center rounded-full font-mono text-[10px] font-semibold; color:var(--preset-accent); background:color-mix(in oklab,var(--preset-accent) 10%,transparent); }
+  .expectation-row p { @apply text-sm leading-6 text-muted-foreground; }
 }
 
 .ripple-field { position:absolute; inset:0; overflow:hidden; pointer-events:none; opacity:.6; }
@@ -211,6 +216,17 @@
 }
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
+}
+
+::view-transition-old(root) { animation: none; z-index: 1; }
+::view-transition-new(root) {
+  z-index: 9999;
+  animation: theme-ripple .72s cubic-bezier(.22,1,.36,1);
+  clip-path: circle(var(--theme-radius) at var(--theme-x) var(--theme-y));
+}
+@keyframes theme-ripple {
+  from { clip-path: circle(0 at var(--theme-x) var(--theme-y)); }
+  to { clip-path: circle(var(--theme-radius) at var(--theme-x) var(--theme-y)); }
 }
 
 ::selection { background: rgba(34,211,238,.22); color: white; }
