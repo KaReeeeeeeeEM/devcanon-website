@@ -1,6 +1,27 @@
 import type { Metadata } from "next";
-import { ExternalLink, MonitorDown, Package, Terminal, Workflow } from "lucide-react";
+import { Apple, ArrowUpRight, Check, Code2, Download as DownloadIcon, Laptop, Package, Terminal, Workflow } from "lucide-react";
 import { CopyCommand } from "@/components/copy-command";
-export const metadata: Metadata = { title: "Download", description: "Install devcanon globally, through npx, or as a project dependency." };
-const methods=[{icon:Terminal,title:"Global CLI",copy:"npm install --global devcanon",text:"Best when you use devcanon across many repositories."},{icon:Workflow,title:"One-off with npx",copy:"npx devcanon init",text:"The fastest way to initialize one repository."},{icon:Package,title:"Project pinned",copy:"npm install --save-dev devcanon",text:"Best for teams that want a reproducible CLI version."}];
-export default function Download(){return <main><section className="page-hero text-center"><p className="section-kicker">Install / Download</p><h1 className="section-title mx-auto mt-5 max-w-4xl">One command away from a better starting point.</h1><p className="section-copy mx-auto mt-5 max-w-2xl">Devcanon is distributed through npm and supports macOS, Linux, and Windows anywhere Node.js 20+ runs.</p><a className="button-secondary mt-7" href="https://www.npmjs.com/package/devcanon" target="_blank" rel="noreferrer">View on npm <ExternalLink className="size-4"/></a></section><section className="mx-auto grid max-w-7xl gap-5 px-5 pb-16 md:grid-cols-3 lg:px-8">{methods.map(({icon:Icon,title,copy,text})=><article className="feature-card" key={title}><Icon/><h2 className="mt-6 text-xl font-semibold text-white">{title}</h2><p>{text}</p><div className="mt-6"><CopyCommand command={copy}/></div></article>)}</section><section className="mx-auto max-w-7xl px-5 pb-24 lg:px-8"><article className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-cyan-300/15 bg-cyan-400/[.04] p-7 md:flex-row md:items-center"><div><MonitorDown className="size-6 text-cyan-400"/><h2 className="mt-4 text-2xl font-semibold text-white">Devcanon Studio for desktop</h2><p className="mt-2 max-w-2xl text-slate-400">Use the visual preset builder as a native app on macOS, Windows, or Linux. Desktop packages are published with signed release notes on GitHub.</p></div><a className="button-secondary shrink-0" href="https://github.com/KaReeeeeeeeEM/devcanon-website/releases">Desktop downloads <ExternalLink className="size-4"/></a></article></section><section className="border-y border-white/8 bg-white/[.018]"><div className="mx-auto max-w-4xl px-5 py-20"><p className="section-kicker">Requirements</p><h2 className="mt-4 text-3xl font-semibold tracking-tight text-white">Small footprint. Clear boundaries.</h2><div className="mt-8 grid gap-4 sm:grid-cols-2"><div className="feature-card"><h3 className="mt-0">Runtime</h3><p>Node.js 20 or newer. The CLI itself has zero runtime dependencies.</p></div><div className="feature-card"><h3 className="mt-0">Supported projects</h3><p>Any language, framework, repository layout, or AI coding tool that can read Markdown instructions.</p></div></div></div></section></main>}
+import { TechnologyMarquee } from "@/components/technology-marquee";
+
+export const metadata: Metadata = { title: "Download", description: "Install devcanon through npm or download Devcanon Studio for desktop." };
+const installs=[{icon:Terminal,title:"Global CLI",copy:"npm install --global devcanon",text:"Keep Devcanon available across every repository."},{icon:Workflow,title:"Run once",copy:"npx devcanon init",text:"Add the standards without a global installation."},{icon:Package,title:"Pin for a team",copy:"npm install --save-dev devcanon",text:"Commit one reproducible version for everyone."}];
+
+export default function Download(){return <main>
+  <section className="download-hero">
+    <div className="download-glow" aria-hidden="true" />
+    <div className="download-mark"><span>D</span><b>›</b></div>
+    <p className="section-kicker">Get Devcanon</p>
+    <h1>Put your engineering standards one command away.</h1>
+    <p className="download-intro">Free, open source, and local-first. Use the CLI in any repository or open the visual Studio on macOS, Windows, and Linux.</p>
+    <article className="release-card">
+      <div className="release-icon"><DownloadIcon /></div>
+      <div className="min-w-0 flex-1"><p className="release-eyebrow">Recommended</p><h2>Install the Devcanon CLI</h2><p>Works anywhere Node.js 20 or newer is available.</p></div>
+      <a className="release-action" href="https://www.npmjs.com/package/devcanon" target="_blank" rel="noreferrer">View on npm <ArrowUpRight /></a>
+      <div className="release-command"><CopyCommand command="npm install --global devcanon" prominent /></div>
+    </article>
+    <div className="platforms"><span>Available for</span><div><span><Apple/> macOS</span><span><Laptop/> Windows</span><span><Terminal/> Linux</span></div></div>
+    <p className="download-note">Prefer a visual interface? <a href="https://github.com/KaReeeeeeeeEM/devcanon-website/releases" target="_blank" rel="noreferrer">See desktop releases</a>. Found a problem? <a href="https://github.com/KaReeeeeeeeEM/devcanon/issues" target="_blank" rel="noreferrer">Report it on GitHub</a>.</p>
+  </section>
+  <TechnologyMarquee />
+  <section className="download-methods"><div className="mb-10 max-w-2xl"><p className="section-kicker">Choose your workflow</p><h2>One tool, three ways to start.</h2><p>Every installation path produces the same standards and preserves existing repository conventions.</p></div><div className="grid gap-4 md:grid-cols-3">{installs.map(({icon:Icon,title,copy,text})=><article className="install-method" key={title}><div><Icon/><Check className="status-check"/></div><h3>{title}</h3><p>{text}</p><CopyCommand command={copy}/></article>)}</div><div className="mt-8 flex flex-wrap gap-3"><a className="button-secondary" href="/docs">Read installation docs</a><a className="button-secondary" href="https://github.com/KaReeeeeeeeEM/devcanon" target="_blank" rel="noreferrer"><Code2/> View source</a></div></section>
+</main>}
