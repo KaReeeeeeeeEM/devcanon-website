@@ -14,9 +14,17 @@
   "bundle": {
     "active": true,
     "targets": "all",
+    "createUpdaterArtifacts": true,
     "category": "DeveloperTool",
     "shortDescription": "Edit and update Devcanon engineering standards visually.",
     "longDescription": "A local-first desktop companion for opening, editing, and safely updating the Devcanon handbook in any repository.",
     "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDcwMTBDQzJEQjZDOTZGQQpSV1Q2bG16Yndnd0JCNFpGbktJdXZrZGkzRjVjaFVaaWFJOVAzclo0MytybzhUd0dLYzd4MzVEdAo=",
+      "endpoints": ["https://github.com/KaReeeeeeeeEM/devcanon-website/releases/latest/download/latest.json"],
+      "windows": { "installMode": "passive" }
+    }
   }
 }
