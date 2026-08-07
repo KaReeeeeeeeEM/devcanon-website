@@ -22,8 +22,8 @@ jobs:
             args: ""
     runs-on: ${{ matrix.platform }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 20
           cache: npm
@@ -42,7 +42,13 @@ jobs:
         with:
           tagName: studio-v__VERSION__
           releaseName: Devcanon Studio v__VERSION__
-          releaseBody: Installable desktop preset builder for macOS, Windows, and Linux.
+          releaseBody: |
+            Devcanon Studio now discovers projects initialized through the CLI automatically.
+
+            - Detects repositories containing `.ai/AGENTS.md` in the user home folder.
+            - Lists detected and recent projects together in the Studio sidebar.
+            - Adds an on-demand refresh action for newly initialized repositories.
+            - Includes signed installers and in-app update artifacts for macOS, Windows, and Linux.
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}

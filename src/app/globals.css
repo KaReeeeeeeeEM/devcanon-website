@@ -262,6 +262,20 @@
   .asset-name strong,.asset-name small { @apply block; }
   .asset-name strong { @apply truncate text-sm; }
   .asset-name small { @apply mt-1 text-xs text-muted-foreground; }
+  .release-table-wrap { @apply mt-6 overflow-x-auto rounded-2xl border border-border bg-card; }
+  .release-table { @apply w-full min-w-[880px] border-collapse text-left text-sm; }
+  .release-table thead { @apply bg-muted/45 text-xs uppercase tracking-wider text-muted-foreground; }
+  .release-table th { @apply px-4 py-3 font-medium; }
+  .release-table td { @apply border-t border-border px-4 py-4 align-middle text-muted-foreground; }
+  .release-table tbody tr { @apply transition-colors hover:bg-cyan-500/[.035]; }
+  .release-version-link { @apply inline-flex items-center gap-1.5 font-medium text-foreground hover:text-cyan-500; }
+  .release-version-link svg { @apply size-3.5; }
+  .latest-badge { @apply ml-2 inline-flex rounded-full bg-cyan-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400; }
+  .installer-link { @apply flex max-w-md items-center gap-2 font-medium text-foreground hover:text-cyan-500; }
+  .installer-link svg { @apply size-4 shrink-0 text-cyan-500; }
+  .installer-link span { @apply truncate; }
+  .table-download-link { @apply inline-flex items-center gap-2 whitespace-nowrap rounded-lg border border-border px-3 py-2 font-medium text-foreground transition hover:border-cyan-500/40 hover:bg-cyan-500/[.06]; }
+  .table-download-link svg { @apply size-4 text-cyan-500; }
   .empty-releases { @apply my-8 flex flex-col items-center rounded-2xl border border-dashed border-border bg-card/40 px-6 py-14 text-center; }
   .empty-releases>svg { @apply size-8 text-cyan-500; }
   .empty-releases h3 { @apply mt-5 text-lg font-semibold; }
