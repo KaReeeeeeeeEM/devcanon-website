@@ -1,6 +1,5 @@
-import { Apple } from "lucide-react";
 import { createElement, type SVGProps } from "react";
-import { SiLinux } from "@icons-pack/react-simple-icons";
+import { SiApple, SiLinux } from "@icons-pack/react-simple-icons";
 
 function MicrosoftIcon(props: SVGProps<SVGSVGElement>) {
   return createElement("svg", { ...props, viewBox: "0 0 24 24", role: "img", "aria-label": "Microsoft Windows" },
@@ -12,7 +11,7 @@ function MicrosoftIcon(props: SVGProps<SVGSVGElement>) {
 }
 
 export const desktopPlatforms = {
-  macos: { name: "macOS", short: "Mac", icon: Apple, description: "Universal Apple Silicon and Intel builds.", formats: [".dmg", ".app.tar.gz"], pattern: /\.(dmg|app\.tar\.gz)$/i },
+  macos: { name: "macOS", short: "Mac", icon: SiApple, description: "Universal Apple Silicon and Intel builds.", formats: [".dmg", ".app.tar.gz"], pattern: /\.(dmg|app\.tar\.gz)$/i },
   windows: { name: "Windows", short: "Windows", icon: MicrosoftIcon, description: "Native installers for Windows 10 and 11.", formats: [".msi", ".exe"], pattern: /\.(msi|exe)$/i },
   linux: { name: "Linux", short: "Linux", icon: SiLinux, description: "Portable and distribution-friendly packages.", formats: [".AppImage", ".deb", ".rpm"], pattern: /\.(AppImage|deb|rpm)$/i },
 } as const;
