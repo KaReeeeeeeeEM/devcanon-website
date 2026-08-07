@@ -3,7 +3,7 @@ import { Download, ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = { title: "Changelog", description: "The live Devcanon CLI and Studio release timeline, notes, fixes, and downloads." };
-export const revalidate = 3600;
+export const revalidate = 300;
 
 type GitHubRelease = { id: number; tag_name: string; name: string | null; published_at: string; html_url: string; body: string | null; prerelease: boolean };
 type Release = GitHubRelease & { channel: "CLI" | "Studio" };
@@ -11,7 +11,7 @@ const fallback: Release[] = [{ id: 211, tag_name: "v2.1.1", name: "Devcanon 2.1.
 
 async function repositoryReleases(repository: string, channel: Release["channel"]): Promise<Release[]> {
   try {
-    const response = await fetch(`https://api.github.com/repos/KaReeeeeeeeEM/${repository}/releases?per_page=30`, { headers: { Accept: "application/vnd.github+json" }, next: { revalidate: 3600 } });
+    const response = await fetch(`https://api.github.com/repos/KaReeeeeeeeEM/${repository}/releases?per_page=30`, { headers: { Accept: "application/vnd.github+json" }, next: { revalidate: 300 } });
     if (!response.ok) return [];
     return ((await response.json()) as GitHubRelease[]).map(release => ({ ...release, channel }));
   } catch { return []; }
