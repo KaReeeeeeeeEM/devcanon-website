@@ -2,7 +2,8 @@
 
 use serde::Serialize;
 use std::{
-    fs,
+    collections::HashSet,
+    env, fs,
     path::{Path, PathBuf},
     process::Command,
     sync::Mutex,
@@ -16,6 +17,51 @@ struct PendingUpdate(Mutex<Option<Update>>);
 #[serde(rename_all = "camelCase")]
 struct StudioInfo {
     version: String,
+}
+
+const SKIPPED_DISCOVERY_DIRECTORIES: &[&str] = &[
+    ".cache",
+    ".git",
+    ".gradle",
+    ".local",
+    ".npm",
+    ".rustup",
+    ".Trash",
+    ".yarn",
+    "AppData",
+    "Applications",
+    "Library",
+    "node_modules",
+    "target",
+];
+
+fn discovery_home() -> Option<PathBuf> {
+    env::var_os(if cfg!(windows) { "USERPROFILE" } else { "HOME" }).map(PathBuf::from)
+}
+
+fn discover_in(directory: &Path, projects: &mut HashSet<PathBuf>) {
+    let Ok(entries) = fs::read_dir(directory) else {
+        return;
+    };
+    for entry in entries.flatten() {
+        let path = entry.path();
+        let Ok(file_type) = entry.file_type() else {
+            continue;
+        };
+        if !file_type.is_dir() || file_type.is_symlink() {
+            continue;
+        }
+        if path.join(".ai").join("AGENTS.md").is_file() {
+            projects.insert(path);
+            continue;
+        }
+        let name = entry.file_name();
+        let name = name.to_string_lossy();
+        if SKIPPED_DISCOVERY_DIRECTORIES.contains(&name.as_ref()) {
+            continue;
+        }
+        discover_in(&path, projects);
+    }
 }
 
 #[derive(Serialize)]
@@ -87,6 +133,24 @@ fn choose_project() -> Option<String> {
     rfd::FileDialog::new()
         .pick_folder()
         .map(|path| path.to_string_lossy().into_owned())
+}
+
+#[tauri::command]
+async fn discover_projects() -> Result<Vec<String>, String> {
+    let home =
+        discovery_home().ok_or_else(|| "Studio could not locate your home folder.".to_string())?;
+    tauri::async_runtime::spawn_blocking(move || {
+        let mut projects = HashSet::new();
+        discover_in(&home, &mut projects);
+        let mut projects: Vec<String> = projects
+            .into_iter()
+            .map(|path| path.to_string_lossy().into_owned())
+            .collect();
+        projects.sort_by_key(|path| path.to_lowercase());
+        projects
+    })
+    .await
+    .map_err(|error| format!("Project discovery could not finish: {error}"))
 }
 
 #[tauri::command]
@@ -223,6 +287,7 @@ fn main() {
         .manage(PendingUpdate(Mutex::new(None)))
         .invoke_handler(tauri::generate_handler![
             studio_info,
+            discover_projects,
             choose_project,
             initialize_project,
             list_standards,
@@ -234,4 +299,25 @@ fn main() {
         ])
         .run(tauri::generate_context!())
         .expect("error while running Devcanon Studio");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn discovery_finds_handbooks_and_skips_dependency_trees() {
+        let root = env::temp_dir().join(format!("devcanon-discovery-{}", std::process::id()));
+        let project = root.join("work").join("my-project");
+        let dependency = root.join("work").join("node_modules").join("not-a-project");
+        fs::create_dir_all(project.join(".ai")).unwrap();
+        fs::create_dir_all(dependency.join(".ai")).unwrap();
+        fs::write(project.join(".ai").join("AGENTS.md"), "# Standards").unwrap();
+        fs::write(dependency.join(".ai").join("AGENTS.md"), "# Ignore").unwrap();
+        let mut projects = HashSet::new();
+        discover_in(&root, &mut projects);
+        assert!(projects.contains(&project));
+        assert!(!projects.contains(&dependency));
+        fs::remove_dir_all(root).unwrap();
+    }
 }
