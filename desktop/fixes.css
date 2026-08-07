@@ -42,3 +42,32 @@
 .project-item.active {
   box-shadow: none;
 }
+
+.update-orb {
+  animation: none;
+}
+
+.update-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(66, 217, 245, 0.18);
+  border-top-color: var(--accent);
+  border-right-color: rgba(66, 217, 245, 0.62);
+  border-radius: 50%;
+  animation: spinner-rotate 0.8s linear infinite;
+  box-shadow: 0 0 20px rgba(66, 217, 245, 0.08);
+}
+
+@keyframes spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .update-spinner {
+    animation: none !important;
+    border-color: rgba(66, 217, 245, 0.35);
+    border-top-color: var(--accent);
+  }
+}
