@@ -1,5 +1,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use include_dir::{include_dir, Dir};
 use serde::Serialize;
 use std::{
     collections::HashSet,
@@ -12,6 +13,16 @@ use tauri::{ipc::Channel, AppHandle, State};
 use tauri_plugin_updater::{Update, UpdaterExt};
 
 struct PendingUpdate(Mutex<Option<Update>>);
+
+static EMBEDDED_STANDARDS: Dir<'_> =
+    include_dir!("$CARGO_MANIFEST_DIR/../node_modules/devcanon/.ai");
+
+const ROOT_AGENTS: &str = r#"# Repository AI Instructions
+
+The authoritative AI engineering standards for this repository are in [`.ai/AGENTS.md`](.ai/AGENTS.md).
+
+Before planning or modifying code, read `.ai/AGENTS.md`, `.ai/project-rules.md`, and every standard relevant to the task. Existing repository conventions remain authoritative where the standards require local adaptation.
+"#;
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -191,13 +202,61 @@ fn run_devcanon(command: &str, project: &str) -> Result<String, String> {
     }
 }
 
+fn install_embedded_directory(source: &Dir<'_>, destination: &Path) -> Result<(), String> {
+    fs::create_dir_all(destination)
+        .map_err(|error| format!("Studio could not create {}: {error}", destination.display()))?;
+    for file in source.files() {
+        let name = file
+            .path()
+            .file_name()
+            .ok_or_else(|| "A bundled standard has an invalid file name.".to_string())?;
+        let target = destination.join(name);
+        if !target.exists() {
+            fs::write(&target, file.contents())
+                .map_err(|error| format!("Studio could not write {}: {error}", target.display()))?;
+        }
+    }
+    for directory in source.dirs() {
+        let name = directory
+            .path()
+            .file_name()
+            .ok_or_else(|| "A bundled standards folder has an invalid name.".to_string())?;
+        install_embedded_directory(directory, &destination.join(name))?;
+    }
+    Ok(())
+}
+
+fn initialize_project_at(project: &Path) -> Result<(), String> {
+    if project.parent().is_none() {
+        return Err("Choose a project folder instead of the filesystem root.".to_string());
+    }
+    if !project.is_dir() {
+        return Err(format!(
+            "The selected project folder does not exist: {}",
+            project.display()
+        ));
+    }
+    install_embedded_directory(&EMBEDDED_STANDARDS, &project.join(".ai"))?;
+    let root_agents = project.join("AGENTS.md");
+    if !root_agents.exists() {
+        fs::write(&root_agents, ROOT_AGENTS).map_err(|error| {
+            format!(
+                "Studio initialized the handbook but could not create {}: {error}",
+                root_agents.display()
+            )
+        })?;
+    }
+    handbook_root(&project.to_string_lossy())?;
+    Ok(())
+}
+
 #[tauri::command]
 fn initialize_project() -> Result<Option<String>, String> {
     let Some(path) = rfd::FileDialog::new().pick_folder() else {
         return Ok(None);
     };
     let project = path.to_string_lossy().into_owned();
-    run_devcanon("init", &project)?;
+    initialize_project_at(&path)?;
     Ok(Some(project))
 }
 
@@ -318,6 +377,28 @@ mod tests {
         discover_in(&root, &mut projects);
         assert!(projects.contains(&project));
         assert!(!projects.contains(&dependency));
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn new_project_initialization_installs_embedded_standards_without_overwriting() {
+        let root = env::temp_dir().join(format!("devcanon-init-{}", std::process::id()));
+        let project = root.join("new-project");
+        fs::create_dir_all(&project).unwrap();
+        fs::write(project.join("AGENTS.md"), "# Existing instructions").unwrap();
+
+        initialize_project_at(&project).unwrap();
+
+        assert!(project.join(".ai").join("AGENTS.md").is_file());
+        assert!(project
+            .join(".ai")
+            .join("prompts")
+            .join("crud.md")
+            .is_file());
+        assert_eq!(
+            fs::read_to_string(project.join("AGENTS.md")).unwrap(),
+            "# Existing instructions"
+        );
         fs::remove_dir_all(root).unwrap();
     }
 }

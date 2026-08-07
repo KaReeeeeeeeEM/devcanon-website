@@ -43,11 +43,12 @@ jobs:
           tagName: studio-v__VERSION__
           releaseName: Devcanon Studio v__VERSION__
           releaseBody: |
-            Devcanon Studio 1.1.2 makes larger project collections easier to navigate.
+            Devcanon Studio 1.1.3 makes new-project setup truly automatic.
 
-            - Adds instant project search to the Studio sidebar.
-            - Matches projects by repository name or full local path.
-            - Adds a clear action, result count, keyboard dismissal, and a helpful empty state.
+            - Bundles the complete Devcanon handbook inside Studio.
+            - Initializes the selected new-project folder without requiring a global CLI or network connection.
+            - Preserves existing files while adding missing standards and the root AGENTS.md discovery file.
+            - Keeps Open existing project validation-only for repositories that already use Devcanon.
             - Includes signed installers and in-app update artifacts for macOS, Windows, and Linux.
           releaseDraft: false
           prerelease: false
