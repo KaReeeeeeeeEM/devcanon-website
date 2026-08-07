@@ -43,11 +43,11 @@ jobs:
           tagName: studio-v__VERSION__
           releaseName: Devcanon Studio v__VERSION__
           releaseBody: |
-            Devcanon Studio now discovers projects initialized through the CLI automatically.
+            Devcanon Studio 1.1.1 refines the in-app update experience.
 
-            - Detects repositories containing `.ai/AGENTS.md` in the user home folder.
-            - Lists detected and recent projects together in the Studio sidebar.
-            - Adds an on-demand refresh action for newly initialized repositories.
+            - Replaces the rotating arrow character with a proper progress ring spinner.
+            - Keeps the branded update container stationary while progress is active.
+            - Adds an accessible loading status and reduced-motion fallback.
             - Includes signed installers and in-app update artifacts for macOS, Windows, and Linux.
           releaseDraft: false
           prerelease: false
