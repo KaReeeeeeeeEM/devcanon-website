@@ -30,6 +30,54 @@ struct StudioInfo {
     version: String,
 }
 
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct EditorInfo {
+    id: &'static str,
+    name: &'static str,
+    available: bool,
+}
+
+struct EditorDefinition {
+    id: &'static str,
+    name: &'static str,
+    command: &'static str,
+    mac_app: &'static str,
+}
+
+const EDITORS: &[EditorDefinition] = &[
+    EditorDefinition {
+        id: "vscode",
+        name: "Visual Studio Code",
+        command: "code",
+        mac_app: "Visual Studio Code",
+    },
+    EditorDefinition {
+        id: "cursor",
+        name: "Cursor",
+        command: "cursor",
+        mac_app: "Cursor",
+    },
+    EditorDefinition {
+        id: "conductor",
+        name: "Conductor",
+        command: "conductor",
+        mac_app: "Conductor",
+    },
+    EditorDefinition {
+        id: "windsurf",
+        name: "Windsurf",
+        command: "windsurf",
+        mac_app: "Windsurf",
+    },
+    EditorDefinition {
+        id: "zed",
+        name: "Zed",
+        command: "zed",
+        mac_app: "Zed",
+    },
+];
+
 const SKIPPED_DISCOVERY_DIRECTORIES: &[&str] = &[
     ".cache",
     ".git",
@@ -48,6 +96,46 @@ const SKIPPED_DISCOVERY_DIRECTORIES: &[&str] = &[
 
 fn discovery_home() -> Option<PathBuf> {
     env::var_os(if cfg!(windows) { "USERPROFILE" } else { "HOME" }).map(PathBuf::from)
+}
+
+fn command_path(command: &str) -> Option<PathBuf> {
+    let path = env::var_os("PATH")?;
+    let extensions: Vec<String> = if cfg!(windows) {
+        env::var("PATHEXT")
+            .unwrap_or_else(|_| ".EXE;.CMD;.BAT;.COM".to_string())
+            .split(';')
+            .map(str::to_lowercase)
+            .collect()
+    } else {
+        vec![String::new()]
+    };
+    for directory in env::split_paths(&path) {
+        for extension in &extensions {
+            let candidate = directory.join(format!("{command}{extension}"));
+            if candidate.is_file() {
+                return Some(candidate);
+            }
+        }
+    }
+    None
+}
+
+#[cfg(target_os = "macos")]
+fn mac_app_path(name: &str) -> Option<PathBuf> {
+    let bundle = format!("{name}.app");
+    let mut locations = vec![PathBuf::from("/Applications").join(&bundle)];
+    if let Some(home) = discovery_home() {
+        locations.push(home.join("Applications").join(&bundle));
+    }
+    locations.into_iter().find(|path| path.is_dir())
+}
+
+fn editor_available(editor: &EditorDefinition) -> bool {
+    #[cfg(target_os = "macos")]
+    if mac_app_path(editor.mac_app).is_some() {
+        return true;
+    }
+    command_path(editor.command).is_some()
 }
 
 fn discover_in(directory: &Path, projects: &mut HashSet<PathBuf>) {
@@ -169,6 +257,48 @@ fn studio_info(app: AppHandle) -> StudioInfo {
     StudioInfo {
         version: app.package_info().version.to_string(),
     }
+}
+
+#[tauri::command]
+fn list_editors() -> Vec<EditorInfo> {
+    EDITORS
+        .iter()
+        .map(|editor| EditorInfo {
+            id: editor.id,
+            name: editor.name,
+            available: editor_available(editor),
+        })
+        .collect()
+}
+
+#[tauri::command]
+fn open_in_editor(project: String, editor: String) -> Result<(), String> {
+    let project = PathBuf::from(project);
+    if !project.is_dir() {
+        return Err("The selected project folder no longer exists.".to_string());
+    }
+    let definition = EDITORS
+        .iter()
+        .find(|candidate| candidate.id == editor)
+        .ok_or_else(|| "Choose a supported code editor.".to_string())?;
+
+    #[cfg(target_os = "macos")]
+    if mac_app_path(definition.mac_app).is_some() {
+        Command::new("open")
+            .args(["-a", definition.mac_app])
+            .arg(&project)
+            .spawn()
+            .map_err(|error| format!("Could not open {}: {error}", definition.name))?;
+        return Ok(());
+    }
+
+    let executable = command_path(definition.command)
+        .ok_or_else(|| format!("{} is not installed or available on PATH.", definition.name))?;
+    Command::new(executable)
+        .arg(&project)
+        .spawn()
+        .map_err(|error| format!("Could not open {}: {error}", definition.name))?;
+    Ok(())
 }
 
 fn run_devcanon(command: &str, project: &str) -> Result<String, String> {
@@ -346,6 +476,8 @@ fn main() {
         .manage(PendingUpdate(Mutex::new(None)))
         .invoke_handler(tauri::generate_handler![
             studio_info,
+            list_editors,
+            open_in_editor,
             discover_projects,
             choose_project,
             initialize_project,
@@ -400,5 +532,14 @@ mod tests {
             "# Existing instructions"
         );
         fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn editor_catalog_has_stable_unique_ids() {
+        let ids: HashSet<&str> = EDITORS.iter().map(|editor| editor.id).collect();
+        assert_eq!(ids.len(), EDITORS.len());
+        assert!(ids.contains("vscode"));
+        assert!(ids.contains("cursor"));
+        assert!(ids.contains("conductor"));
     }
 }

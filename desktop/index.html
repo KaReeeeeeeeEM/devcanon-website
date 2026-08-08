@@ -26,7 +26,7 @@
     <main class="workspace">
       <header class="toolbar">
         <div class="toolbar-title"><button class="icon-button expand-button" id="expand" aria-label="Expand sidebar">☰</button><div><p class="eyebrow">Local handbook editor</p><h1 id="file-name">Welcome to Devcanon Studio</h1></div></div>
-        <div class="toolbar-actions"><span class="save-state" id="save-state">No file open</span><button class="secondary-button" id="standards-update" disabled>Update handbook</button><button class="save-button" id="save" disabled>Save changes</button></div>
+        <div class="toolbar-actions"><span class="save-state" id="save-state">No file open</span><div class="editor-picker"><button class="secondary-button editor-trigger" id="open-in-editor" type="button" aria-haspopup="menu" aria-expanded="false" disabled><span class="editor-trigger-icon" aria-hidden="true">⌘</span>Open in editor <span aria-hidden="true">⌄</span></button><div class="editor-menu" id="editor-menu" role="menu" aria-label="Open project in code editor" hidden></div></div><button class="secondary-button" id="standards-update" disabled>Update handbook</button><button class="save-button" id="save" disabled>Save changes</button></div>
       </header>
       <section class="empty-state" id="empty-state"><div class="empty-mark">D›</div><p class="eyebrow">Engineering standards, on command</p><h2>Choose a project to shape how AI builds it.</h2><p>Start a new Devcanon project or reopen an existing handbook. Your recent projects stay one click away in the sidebar.</p><button class="primary-button" id="empty-open">Choose a project</button></section>
       <textarea id="editor" class="editor" aria-label="Standard editor" spellcheck="false" hidden></textarea>
