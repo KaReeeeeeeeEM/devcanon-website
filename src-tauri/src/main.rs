@@ -533,7 +533,6 @@ mod tests {
         );
         fs::remove_dir_all(root).unwrap();
     }
-
     #[test]
     fn editor_catalog_has_stable_unique_ids() {
         let ids: HashSet<&str> = EDITORS.iter().map(|editor| editor.id).collect();
