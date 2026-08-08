@@ -76,6 +76,18 @@ const EDITORS: &[EditorDefinition] = &[
         command: "zed",
         mac_app: "Zed",
     },
+    EditorDefinition {
+        id: "antigravity",
+        name: "Antigravity IDE",
+        command: "agy-ide",
+        mac_app: "Antigravity IDE",
+    },
+    EditorDefinition {
+        id: "atom",
+        name: "Atom",
+        command: "atom",
+        mac_app: "Atom",
+    },
 ];
 
 const SKIPPED_DISCOVERY_DIRECTORIES: &[&str] = &[
@@ -540,5 +552,7 @@ mod tests {
         assert!(ids.contains("vscode"));
         assert!(ids.contains("cursor"));
         assert!(ids.contains("conductor"));
+        assert!(ids.contains("antigravity"));
+        assert!(ids.contains("atom"));
     }
 }

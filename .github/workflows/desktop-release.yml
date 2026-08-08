@@ -43,13 +43,13 @@ jobs:
           tagName: studio-v__VERSION__
           releaseName: Devcanon Studio v__VERSION__
           releaseBody: |
-            Devcanon Studio 1.1.4 lets you move from standards to implementation in your editor of choice.
+            Devcanon Studio 1.1.5 makes handbook editing faster and safer with automatic saving.
 
-            - Adds an Open in editor dropdown for every selected project.
-            - Detects Visual Studio Code, Cursor, Conductor, Windsurf, and Zed locally.
-            - Shows recognizable editor marks and clearly labels unavailable editors.
-            - Supports keyboard navigation and compact window layouts.
-            - Opens the validated project directory directly without shell interpolation.
+            - Saves handbook edits automatically after you pause typing.
+            - Shows clear saving, saved, and autosave failure states.
+            - Preserves edits before switching files, projects, or updating the handbook.
+            - Aligns the Open in editor chevron with its icon and label.
+            - Adds Antigravity IDE and Atom to the installed-editor picker.
             - Includes signed installers and in-app update artifacts for macOS, Windows, and Linux.
           releaseDraft: false
           prerelease: false

@@ -116,7 +116,8 @@ The desktop workflow builds macOS, Windows, and Linux packages, signs updater ar
 
 ## Recent improvements and fixes
 
-- Added an installed-editor picker for opening projects in Visual Studio Code, Cursor, Conductor, Windsurf, or Zed.
+- Added automatic handbook saving with clear progress and failure feedback.
+- Expanded the installed-editor picker to Visual Studio Code, Cursor, Conductor, Windsurf, Zed, Antigravity IDE, and Atom.
 - Removed hydration-heavy animation libraries from routine page reveals.
 - Pre-rendered all documentation topics and added previous/next navigation.
 - Added complete CLI and desktop installation guidance for every supported OS.
