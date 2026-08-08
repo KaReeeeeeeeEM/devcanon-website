@@ -59,6 +59,18 @@
   font-family: ui-monospace, monospace;
 }
 
+.editor-chevron {
+  display: block;
+  width: 14px;
+  height: 14px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .editor-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -147,6 +159,8 @@
 .editor-logo-conductor { background: #6d5dfc; }
 .editor-logo-windsurf { background: #0a8f8b; }
 .editor-logo-zed { background: #ec5b33; }
+.editor-logo-antigravity { background: linear-gradient(145deg, #4285f4, #7c4dff); }
+.editor-logo-atom { background: #66595c; color: #a8f5cf; }
 
 .update-orb {
   animation: none;
@@ -190,7 +204,8 @@
     color: var(--accent);
   }
 
-  .editor-trigger > span:last-child {
+  .editor-trigger > span:nth-child(2),
+  .editor-trigger .editor-chevron {
     display: none;
   }
 }
