@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { desktopPlatformKeys } from "@/lib/desktop-platforms";
 import { docsPages } from "@/lib/docs-pages";
 
-const siteUrl = "https://devcanon-website.vercel.app";
+const siteUrl = "https://devcanon.almareem.com";
 
 const primaryRoutes = [
   { path: "", changeFrequency: "weekly", priority: 1 },
