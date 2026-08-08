@@ -116,6 +116,7 @@ The desktop workflow builds macOS, Windows, and Linux packages, signs updater ar
 
 ## Recent improvements and fixes
 
+- Added the Devcanon Studio extension for browsing, validating, and updating handbooks in VS Code-compatible editors.
 - Added automatic handbook saving with clear progress and failure feedback.
 - Expanded the installed-editor picker to Visual Studio Code, Cursor, Conductor, Windsurf, Zed, Antigravity IDE, and Atom.
 - Removed hydration-heavy animation libraries from routine page reveals.
