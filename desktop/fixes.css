@@ -162,6 +162,23 @@
 .editor-logo-antigravity { background: linear-gradient(145deg, #4285f4, #7c4dff); }
 .editor-logo-atom { background: #66595c; color: #a8f5cf; }
 
+.setup-modal { width: min(680px, calc(100vw - 40px)); max-height: calc(100vh - 48px); overflow: auto; }
+.setup-field { display: grid; gap: 7px; margin-top: 18px; color: var(--text); font-size: 13px; font-weight: 700; }
+.setup-field small { color: var(--muted); font-size: 11px; font-weight: 400; line-height: 1.5; }
+.setup-field input,.setup-field textarea,.setup-field select { width: 100%; box-sizing: border-box; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--text); padding: 11px 12px; font: inherit; outline: none; }
+.setup-field textarea { min-height: 90px; resize: vertical; }
+.setup-field input:focus,.setup-field textarea:focus,.setup-field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(66,217,245,.1); }
+.setup-field[hidden],#stack-fields[hidden] { display: none; }
+.setup-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.setup-toggle label { cursor: pointer; }
+.setup-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+.setup-toggle span { display: block; border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: var(--surface); }
+.setup-toggle input:checked+span { border-color: var(--accent); background: rgba(66,217,245,.08); }
+.setup-design { display: flex; align-items: center; gap: 10px; margin-top: 18px; border: 1px solid var(--line); border-radius: 10px; padding: 12px; cursor: pointer; }
+.setup-design span { display: grid; gap: 3px; }
+.setup-design small { color: var(--muted); }
+.setup-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+
 .update-orb {
   animation: none;
 }
