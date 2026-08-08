@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 src-tauri/target/
+extensions/vscode/dist/
+extensions/vscode/node_modules/
+extensions/vscode/*.vsix
 
 # typescript
 *.tsbuildinfo

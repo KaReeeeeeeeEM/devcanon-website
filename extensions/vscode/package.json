@@ -1,0 +1,91 @@
+{
+  "name": "devcanon-studio",
+  "displayName": "Devcanon Studio",
+  "description": "Manage, validate, and update your Devcanon engineering handbook without leaving the editor.",
+  "version": "0.1.0",
+  "publisher": "devcanon",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaReeeeeeeeEM/devcanon-website.git"
+  },
+  "homepage": "https://devcanon.almareem.com/studio",
+  "bugs": {
+    "url": "https://github.com/KaReeeeeeeeEM/devcanon-website/issues"
+  },
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": ["Other", "Linters"],
+  "keywords": ["devcanon", "ai", "coding agents", "engineering standards", "handbook", "codex", "claude"],
+  "icon": "media/icon.png",
+  "main": "./dist/extension.js",
+  "extensionKind": ["workspace"],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "Handbook files remain visible, but Devcanon commands require workspace trust."
+    },
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "Devcanon commands operate on local repository files."
+    }
+  },
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "commands": [
+      { "command": "devcanon.initialize", "title": "Devcanon: Initialize Handbook", "icon": "$(new-folder)" },
+      { "command": "devcanon.check", "title": "Devcanon: Check Handbook", "icon": "$(pass)" },
+      { "command": "devcanon.previewUpdate", "title": "Devcanon: Preview Handbook Update", "icon": "$(diff)" },
+      { "command": "devcanon.update", "title": "Devcanon: Update Handbook", "icon": "$(cloud-download)" },
+      { "command": "devcanon.refresh", "title": "Devcanon: Refresh Handbook", "icon": "$(refresh)" },
+      { "command": "devcanon.openStudio", "title": "Devcanon: Open Studio Download Page", "icon": "$(link-external)" }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devcanon",
+          "title": "Devcanon Studio",
+          "icon": "media/activity.svg"
+        }
+      ]
+    },
+    "views": {
+      "devcanon": [
+        {
+          "id": "devcanon.handbook",
+          "name": "Engineering Handbook"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "devcanon.handbook",
+        "contents": "No Devcanon handbook was found in this workspace.\n[Initialize handbook](command:devcanon.initialize)\n[Open documentation](https://devcanon.almareem.com/docs/editors)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        { "command": "devcanon.check", "when": "view == devcanon.handbook", "group": "navigation@1" },
+        { "command": "devcanon.refresh", "when": "view == devcanon.handbook", "group": "navigation@2" },
+        { "command": "devcanon.update", "when": "view == devcanon.handbook", "group": "navigation@3" }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "test": "npm run build && node --test test/*.test.cjs",
+    "package": "npm run test && vsce package --out devcanon-studio.vsix",
+    "publish:vs": "vsce publish",
+    "publish:ovsx": "ovsx publish devcanon-studio.vsix"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.0",
+    "@types/vscode": "^1.95.0",
+    "@vscode/vsce": "3.9.2",
+    "esbuild": "0.28.1",
+    "ovsx": "1.1.0",
+    "typescript": "^5.9.0"
+  }
+}

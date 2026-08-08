@@ -1,0 +1,10 @@
+.github/**
+.vscode/**
+devcanon-studio.vsix
+esbuild.mjs
+node_modules/**
+src/**
+test/**
+tsconfig.json
+**/*.map
+dist/core.cjs
