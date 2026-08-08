@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { PwaRegister } from "@/components/pwa-register";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const siteUrl="https://devcanon-website.vercel.app";
+const siteUrl="https://devcanon.almareem.com";
 export const metadata:Metadata={
   metadataBase:new URL(siteUrl),
   title:{default:"Devcanon — Vibe the idea. Ship it with standards.",template:"%s · Devcanon"},

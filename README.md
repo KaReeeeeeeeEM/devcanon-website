@@ -4,8 +4,8 @@
   <p><strong>Vibe the idea. Ship it with standards.</strong></p>
   <p>The official product, documentation, Studio, download, and release-history experience for Devcanon.</p>
   <p>
-    <a href="https://devcanon-website.vercel.app">Live website</a> ·
-    <a href="https://devcanon-website.vercel.app/docs">Documentation</a> ·
+    <a href="https://devcanon.almareem.com">Live website</a> ·
+    <a href="https://devcanon.almareem.com/docs">Documentation</a> ·
     <a href="https://www.npmjs.com/package/devcanon">npm</a> ·
     <a href="https://github.com/KaReeeeeeeeEM/devcanon">CLI repository</a>
   </p>
@@ -64,7 +64,7 @@ Open the local visual editor:
 devcanon studio
 ```
 
-See the [installation guide](https://devcanon-website.vercel.app/docs/installation) for complete terminal and desktop instructions.
+See the [installation guide](https://devcanon.almareem.com/docs/installation) for complete terminal and desktop instructions.
 
 ## Desktop Studio
 
