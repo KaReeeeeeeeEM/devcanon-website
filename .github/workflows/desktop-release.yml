@@ -43,12 +43,13 @@ jobs:
           tagName: studio-v__VERSION__
           releaseName: Devcanon Studio v__VERSION__
           releaseBody: |
-            Devcanon Studio 1.1.3 makes new-project setup truly automatic.
+            Devcanon Studio 1.1.4 lets you move from standards to implementation in your editor of choice.
 
-            - Bundles the complete Devcanon handbook inside Studio.
-            - Initializes the selected new-project folder without requiring a global CLI or network connection.
-            - Preserves existing files while adding missing standards and the root AGENTS.md discovery file.
-            - Keeps Open existing project validation-only for repositories that already use Devcanon.
+            - Adds an Open in editor dropdown for every selected project.
+            - Detects Visual Studio Code, Cursor, Conductor, Windsurf, and Zed locally.
+            - Shows recognizable editor marks and clearly labels unavailable editors.
+            - Supports keyboard navigation and compact window layouts.
+            - Opens the validated project directory directly without shell interpolation.
             - Includes signed installers and in-app update artifacts for macOS, Windows, and Linux.
           releaseDraft: false
           prerelease: false
