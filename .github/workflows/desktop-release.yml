@@ -43,13 +43,13 @@ jobs:
           tagName: studio-v__VERSION__
           releaseName: Devcanon Studio v__VERSION__
           releaseBody: |
-            Devcanon Studio 1.1.5 makes handbook editing faster and safer with automatic saving.
+            Devcanon Studio 1.2.0 adds simple, guided product setup across desktop and web.
 
-            - Saves handbook edits automatically after you pause typing.
-            - Shows clear saving, saved, and autosave failure states.
-            - Preserves edits before switching files, projects, or updating the handbook.
-            - Aligns the Open in editor chevron with its icon and label.
-            - Adds Antigravity IDE and Atom to the installed-editor picker.
+            - Describe what the product should do in plain language.
+            - Choose a web, mobile, API, desktop, or general product flow.
+            - Select a stack yourself or let the AI choose a simple suitable stack.
+            - Creates a readable product brief and complete end-to-end AI build prompt.
+            - Supports the same portable product configuration as Devcanon CLI 2.2.0 and the PWA.
             - Includes signed installers and in-app update artifacts for macOS, Windows, and Linux.
           releaseDraft: false
           prerelease: false
