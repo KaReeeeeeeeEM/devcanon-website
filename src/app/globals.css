@@ -310,6 +310,25 @@
   .output-code { @apply max-h-24 min-w-0 overflow-auto break-all rounded-xl border border-border bg-background p-3 font-mono text-[11px] leading-5 text-cyan-600 dark:text-cyan-300; scrollbar-width: thin; }
   .command-output { @apply max-h-32 text-muted-foreground; }
   .preset-panel button svg { @apply size-4 shrink-0; }
+  .setup-steps { @apply grid grid-cols-5 gap-1; }
+  .setup-steps button { @apply flex min-w-0 flex-col items-center gap-1 text-muted-foreground disabled:cursor-default; }
+  .setup-steps button span { @apply grid size-8 place-items-center rounded-full border border-border bg-card text-xs font-semibold; }
+  .setup-steps button span svg { @apply size-4; }
+  .setup-steps small { @apply hidden truncate text-[10px] sm:block; }
+  .setup-steps .setup-step-active { @apply text-foreground; }
+  .setup-steps .setup-step-active span { @apply border-cyan-500 bg-cyan-500/10 text-cyan-600 dark:text-cyan-300; }
+  .setup-steps .setup-step-done span { @apply border-emerald-500/40 bg-emerald-500/10 text-emerald-600; }
+  .setup-input { @apply mt-3 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none transition placeholder:text-muted-foreground focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/15; }
+  .stack-choice { @apply flex min-h-12 items-center gap-3 rounded-xl border border-border bg-background px-4 py-3 text-left text-sm font-medium transition hover:border-cyan-500/50 hover:bg-cyan-500/[.04]; }
+  .stack-choice-active { @apply !border-cyan-500 !bg-cyan-500/[.08] text-foreground ring-1 ring-cyan-500/20; }
+  .setup-big-choice,.setup-kind { @apply flex w-full items-center gap-4 rounded-xl border border-border bg-background p-4 text-left transition hover:border-cyan-500/50; }
+  .setup-big-choice>svg:first-child,.setup-kind>svg:first-child { @apply size-6 shrink-0 text-cyan-500; }
+  .setup-big-choice>svg:last-child,.setup-kind>svg:last-child { @apply ml-auto size-4 shrink-0; }
+  .setup-big-choice span,.setup-kind span,.setup-check span { @apply flex min-w-0 flex-1 flex-col; }
+  .setup-big-choice small,.setup-kind small,.setup-check small { @apply mt-1 text-xs font-normal leading-5 text-muted-foreground; }
+  .setup-check { @apply flex cursor-pointer items-center gap-3 rounded-xl border border-border bg-muted/20 p-4; }
+  .setup-check input { @apply size-4 accent-cyan-500; }
+  .setup-check>svg { @apply size-5 text-cyan-500; }
   .preset-orb { @apply grid size-12 shrink-0 place-items-center rounded-full border; color:var(--preset-accent); border-color:color-mix(in oklab,var(--preset-accent) 35%,transparent); background:color-mix(in oklab,var(--preset-accent) 10%,transparent); box-shadow:0 0 40px color-mix(in oklab,var(--preset-accent) 18%,transparent); }
   .preset-orb svg { @apply size-5; }
   .expectation-row { @apply flex gap-3 rounded-xl border border-border bg-muted/30 p-3.5; }

@@ -1,7 +1,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use include_dir::{include_dir, Dir};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::{
     collections::HashSet,
     env, fs,
@@ -43,6 +43,23 @@ struct EditorDefinition {
     name: &'static str,
     command: &'static str,
     mac_app: &'static str,
+}
+
+#[derive(Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ProductConfig {
+    name: String,
+    description: String,
+    kind: String,
+    stack_mode: String,
+    frontend: String,
+    backend: String,
+    database: String,
+    data_tool: String,
+    mobile: String,
+    language: String,
+    extras: Vec<String>,
+    has_design_references: bool,
 }
 
 const EDITORS: &[EditorDefinition] = &[
@@ -402,6 +419,99 @@ fn initialize_project() -> Result<Option<String>, String> {
     Ok(Some(project))
 }
 
+fn product_label(value: &str) -> String {
+    match value {
+        "web" => "Website or web app".into(),
+        "mobile" => "Mobile app".into(),
+        "api" => "API".into(),
+        "desktop" => "Desktop app".into(),
+        "general" => "Other product".into(),
+        "nextjs" => "Next.js".into(),
+        "react" => "React".into(),
+        "vue" => "Vue".into(),
+        "sveltekit" => "SvelteKit".into(),
+        "angular" => "Angular".into(),
+        "html-css-js" => "HTML, CSS and JavaScript".into(),
+        "node-express" => "Node.js / Express".into(),
+        "python-fastapi" => "Python / FastAPI".into(),
+        "python-django" => "Python / Django".into(),
+        "react-native-expo" => "React Native / Expo".into(),
+        "flutter-dart" => "Flutter / Dart".into(),
+        "swift-swiftui" => "Swift / SwiftUI".into(),
+        "kotlin-compose" => "Kotlin / Compose".into(),
+        "typescript" => "TypeScript".into(),
+        "javascript" => "JavaScript".into(),
+        "python" => "Python".into(),
+        "dart" => "Dart".into(),
+        "swift" => "Swift".into(),
+        "kotlin" => "Kotlin".into(),
+        "postgresql" => "PostgreSQL".into(),
+        "mysql" => "MySQL".into(),
+        "sqlite" => "SQLite".into(),
+        "mongodb" => "MongoDB".into(),
+        "supabase" => "Supabase".into(),
+        "firebase" => "Firebase".into(),
+        "drizzle" => "Drizzle".into(),
+        "prisma" => "Prisma".into(),
+        "none" => "None".into(),
+        "other" => "Something else".into(),
+        "not-specified" => "Let the AI choose".into(),
+        _ => value.replace('-', " "),
+    }
+}
+
+fn validate_product(product: &mut ProductConfig) -> Result<(), String> {
+    product.name = product.name.trim().chars().take(120).collect();
+    product.description = product.description.trim().chars().take(4000).collect();
+    if product.name.is_empty() || product.description.is_empty() {
+        return Err("Add a product name and a short description first.".into());
+    }
+    let kinds = ["web", "mobile", "api", "desktop", "general"];
+    if !kinds.contains(&product.kind.as_str())
+        || !["skip", "choose"].contains(&product.stack_mode.as_str())
+    {
+        return Err("Choose one of the product and tool options shown in Studio.".into());
+    }
+    Ok(())
+}
+
+fn write_product_files(project: &Path, product: &ProductConfig) -> Result<(), String> {
+    let root = project.join(".ai");
+    let prompts = root.join("prompts");
+    fs::create_dir_all(&prompts).map_err(|error| error.to_string())?;
+    let stack = if product.stack_mode == "skip" {
+        "Let the AI choose a sensible, simple stack and explain the choice before building."
+            .to_string()
+    } else {
+        format!("- Frontend: {}\n- Backend: {}\n- Mobile: {}\n- Language: {}\n- Database: {}\n- Data tool: {}", product_label(&product.frontend), product_label(&product.backend), product_label(&product.mobile), product_label(&product.language), product_label(&product.database), product_label(&product.data_tool))
+    };
+    let design = if product.has_design_references {
+        "Yes. Attach them with the build prompt."
+    } else {
+        "No. Create a clear, polished design that fits the product."
+    };
+    let brief = format!("# Product brief\n\n## Product\n\n- **Name:** {}\n- **Type:** {}\n- **Design examples:** {}\n\n## What it should do\n\n{}\n\n## Stack\n\n{}\n\n## Why this helps the AI\n\nThis brief tells the AI what the product is for and which technical choices to follow. It should use this context before planning or changing code.\n", product.name, product_label(&product.kind), design, product.description, stack);
+    let prompt = format!("# Build {}\n\nBuild this product from start to finish.\n\n## What it is\n\n{}\n\n## Product type\n\n{}\n\n## Stack\n\n{}\n\n{}\n\nBefore coding, inspect the repository and make a short plan. Reuse its conventions. Build the full working product, including loading, empty, error, and success states. Keep security, accessibility, responsive design, data integrity, and privacy in every decision. Add useful tests, run all relevant checks, fix failures you caused, and finish with a short summary of what works and any honest limitations. Do not leave mock actions or pretend integrations.\n", product.name, product.description, product_label(&product.kind), stack, if product.has_design_references { "I have attached design examples. Use them for visual direction, adapt them to this product, and keep the result accessible." } else { "Create a clear, polished design that fits the product." });
+    fs::write(root.join("product.md"), brief).map_err(|error| error.to_string())?;
+    fs::write(
+        root.join("product.json"),
+        serde_json::to_string_pretty(product).map_err(|error| error.to_string())?,
+    )
+    .map_err(|error| error.to_string())?;
+    fs::write(prompts.join("build-product.md"), prompt).map_err(|error| error.to_string())?;
+    Ok(())
+}
+
+#[tauri::command]
+fn configure_product(project: String, mut product: ProductConfig) -> Result<(), String> {
+    let root = handbook_root(&project)?;
+    validate_product(&mut product)?;
+    let project_path = root
+        .parent()
+        .ok_or_else(|| "The project path is invalid.".to_string())?;
+    write_product_files(project_path, &product)
+}
+
 #[tauri::command]
 fn list_standards(project: String) -> Result<Vec<String>, String> {
     let root = handbook_root(&project)?;
@@ -493,6 +603,7 @@ fn main() {
             discover_projects,
             choose_project,
             initialize_project,
+            configure_product,
             list_standards,
             read_standard,
             write_standard,
@@ -545,6 +656,38 @@ mod tests {
         );
         fs::remove_dir_all(root).unwrap();
     }
+
+    #[test]
+    fn product_setup_writes_a_brief_and_complete_prompt() {
+        let root = env::temp_dir().join(format!("devcanon-product-{}", std::process::id()));
+        fs::create_dir_all(root.join(".ai").join("prompts")).unwrap();
+        let product = ProductConfig {
+            name: "Pocket Garden".into(),
+            description: "Help children remember when to water a plant.".into(),
+            kind: "mobile".into(),
+            stack_mode: "choose".into(),
+            frontend: "not-specified".into(),
+            backend: "not-specified".into(),
+            database: "firebase".into(),
+            data_tool: "none".into(),
+            mobile: "flutter-dart".into(),
+            language: "not-specified".into(),
+            extras: Vec::new(),
+            has_design_references: true,
+        };
+
+        write_product_files(&root, &product).unwrap();
+
+        let brief = fs::read_to_string(root.join(".ai").join("product.md")).unwrap();
+        let prompt =
+            fs::read_to_string(root.join(".ai").join("prompts").join("build-product.md")).unwrap();
+        assert!(brief.contains("Pocket Garden"));
+        assert!(brief.contains("Flutter / Dart"));
+        assert!(prompt.contains("Build this product from start to finish"));
+        assert!(prompt.contains("attached design examples"));
+        fs::remove_dir_all(root).unwrap();
+    }
+
     #[test]
     fn editor_catalog_has_stable_unique_ids() {
         let ids: HashSet<&str> = EDITORS.iter().map(|editor| editor.id).collect();
